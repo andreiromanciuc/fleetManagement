@@ -12,6 +12,7 @@ public class Contract {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private long id;
+    private boolean finished;
 
     public long getId() {
         return id;
@@ -19,5 +20,13 @@ public class Contract {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 }

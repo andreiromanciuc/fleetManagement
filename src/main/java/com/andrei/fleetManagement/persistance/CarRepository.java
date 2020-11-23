@@ -9,7 +9,7 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     @Override
     Page<Car> findAll(Pageable pageable);
 
-    Page<Car> findByPlateNumberOrVinNumber (Pageable pageable);
+    Car findByVinNumber (String vinNumber);
 
-
+    Car findByPlateNumber (String plateNumber);
 }

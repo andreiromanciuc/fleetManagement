@@ -7,8 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ServiceRepository extends JpaRepository<Service, Long> {
-    @Override
-    Page<Service> findAll(Pageable pageable);
-    Page<Service> findByName (Pageable pageable);
+
+    Service findByName (String name);
 
 }

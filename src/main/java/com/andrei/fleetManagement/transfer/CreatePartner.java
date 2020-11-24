@@ -1,33 +1,14 @@
-package com.andrei.fleetManagement.domain;
+package com.andrei.fleetManagement.transfer;
 
-import com.sun.istack.NotNull;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class Service {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class CreatePartner {
     private long id;
-    @NotNull
     private String name;
-    @NotNull
     private String email;
-    @NotNull
     private String password;
-    @NotNull
     private String phoneNumber;
-    @NotNull
     private String cif;
-    @NotNull
     private String bankAccount;
-    @NotNull
     private String address;
-    @NotNull
     private String contactPerson;
 
     public long getId() {

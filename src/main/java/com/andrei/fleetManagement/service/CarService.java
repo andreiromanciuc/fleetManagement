@@ -1,6 +1,7 @@
 package com.andrei.fleetManagement.service;
 
 import com.andrei.fleetManagement.domain.Car;
+import com.andrei.fleetManagement.exception.ResourceNotFoundExceptions;
 import com.andrei.fleetManagement.persistance.CarRepository;
 import com.andrei.fleetManagement.transfer.CreateCar;
 import org.slf4j.Logger;
@@ -31,7 +32,7 @@ public class CarService {
         return carRepository.save(newCar);
     }
 
-    public Car getCar(String plateNumber) {
+    public Car getCarByPlateNumber(String plateNumber) {
         LOGGER.info("Retrieving car by plate number");
         Car car = carRepository.findByPlateNumber(plateNumber);
         return car;
@@ -41,6 +42,12 @@ public class CarService {
         LOGGER.info("Retrieving car by vin code");
         Car byVinNumber = carRepository.findByVinNumber(vinNumber);
         return byVinNumber;
+    }
+
+    public Car getCarById(long id) {
+        LOGGER.info("Retrieving car by id {}", id);
+        return carRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundExceptions("Car "+id+ " is not existing"));
     }
 
     public Car updateMileageOfTheCar(CreateCar car){

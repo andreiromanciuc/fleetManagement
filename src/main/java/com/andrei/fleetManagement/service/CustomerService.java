@@ -1,6 +1,7 @@
 package com.andrei.fleetManagement.service;
 
 import com.andrei.fleetManagement.domain.Customer;
+import com.andrei.fleetManagement.exception.ResourceNotFoundExceptions;
 import com.andrei.fleetManagement.persistance.CustomerRepository;
 import com.andrei.fleetManagement.transfer.CreateCustomer;
 import org.slf4j.Logger;
@@ -35,6 +36,13 @@ public class CustomerService {
     public Customer getCustomerByName(String name) {
         LOGGER.info("Retrieving customer by name {}", name);
         return customerRepository.findByName(name);
+    }
+
+    public Customer getCustomerById(long id) {
+        LOGGER.info("Retrieving customer by id {}", id);
+
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundExceptions("This " + id + " customer not exist"));
     }
 
     public void deleteCustomer(long id) {

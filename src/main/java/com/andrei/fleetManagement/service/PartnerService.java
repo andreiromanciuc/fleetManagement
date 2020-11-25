@@ -1,11 +1,14 @@
 package com.andrei.fleetManagement.service;
 
 import com.andrei.fleetManagement.domain.Partner;
+import com.andrei.fleetManagement.exception.ResourceNotFoundExceptions;
 import com.andrei.fleetManagement.persistance.PartnerRepository;
 import com.andrei.fleetManagement.transfer.CreatePartner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class PartnerService {
@@ -38,6 +41,12 @@ public class PartnerService {
 
     public Partner getPartnerByName(String name) {
         LOGGER.info("Retrieving partner {}", name);
-        return partnerRepository.findByName(name);
+         return partnerRepository.findByName(name);
+    }
+
+    public Partner getPartnerById(long id) {
+        LOGGER.info("Retrieving partner by id {}", id);
+        return partnerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundExceptions("Partner " + id + " is not found"));
     }
 }

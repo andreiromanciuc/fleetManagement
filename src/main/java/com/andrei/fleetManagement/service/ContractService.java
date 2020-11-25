@@ -1,9 +1,6 @@
 package com.andrei.fleetManagement.service;
 
-import com.andrei.fleetManagement.domain.Car;
-import com.andrei.fleetManagement.domain.Contract;
-import com.andrei.fleetManagement.domain.Customer;
-import com.andrei.fleetManagement.domain.Partner;
+import com.andrei.fleetManagement.domain.*;
 import com.andrei.fleetManagement.persistance.ContractRepository;
 import com.andrei.fleetManagement.transfer.CreateContract;
 import org.slf4j.Logger;
@@ -55,8 +52,6 @@ public class ContractService {
         contract.setCustomer(customer);
         contract.setPartner(partner);
         contract.setStartDate(day + "/"+ month +"/"+ year);
-
-
 
         return contractRepository.save(contract);
     }

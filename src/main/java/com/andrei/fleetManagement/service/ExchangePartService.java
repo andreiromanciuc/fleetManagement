@@ -1,20 +1,20 @@
 package com.andrei.fleetManagement.service;
 
 import com.andrei.fleetManagement.domain.ExchangePart;
-import com.andrei.fleetManagement.persistance.ExchangePartsRepository;
+import com.andrei.fleetManagement.persistance.ExchangePartRepository;
 import com.andrei.fleetManagement.transfer.CreateExchangePart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ExchangePartsService {
+public class ExchangePartService {
     private static final Logger LOGGER = LoggerFactory.getLogger(CarService.class);
 
-    private final ExchangePartsRepository exchangePartsRepository;
+    private final ExchangePartRepository exchangePartRepository;
 
-    public ExchangePartsService(ExchangePartsRepository exchangePartsRepository) {
-        this.exchangePartsRepository = exchangePartsRepository;
+    public ExchangePartService(ExchangePartRepository exchangePartRepository) {
+        this.exchangePartRepository = exchangePartRepository;
     }
 
     public ExchangePart createExchangePart(CreateExchangePart createExchangePart) {
@@ -25,6 +25,16 @@ public class ExchangePartsService {
         exchangePart.setQuantity(createExchangePart.getQuantity());
         exchangePart.setPrice(createExchangePart.getPrice());
 
-        return exchangePartsRepository.save(exchangePart);
+        return exchangePartRepository.save(exchangePart);
+    }
+
+    public ExchangePart getExchangePartByName(String name) {
+        LOGGER.info("Retrieving exchange part by name {}", name);
+        return exchangePartRepository.findByName(name);
+    }
+
+    public void deleteExchangePart(long id) {
+        LOGGER.info("Deleting exchange part {}", id);
+        exchangePartRepository.deleteById(id);
     }
 }

@@ -3,13 +3,14 @@ package com.andrei.fleetManagement.service;
 import com.andrei.fleetManagement.domain.*;
 import com.andrei.fleetManagement.persistance.ContractRepository;
 import com.andrei.fleetManagement.transfer.CreateContract;
+import com.andrei.fleetManagement.transfer.CreateExchangePart;
+import com.andrei.fleetManagement.transfer.CreateWorkmanship;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
+import javax.servlet.http.PushBuilder;
+import java.util.*;
 
 
 @Service
@@ -54,6 +55,35 @@ public class ContractService {
         contract.setStartDate(day + "/"+ month +"/"+ year);
 
         return contractRepository.save(contract);
+    }
+
+    public Contract addingPartsToContract(long contractId,
+                                          ExchangePart exchangePart) {
+        LOGGER.info("Adding info to contract {}", contractId);
+
+        Contract contract = contractRepository.findById(contractId);
+
+        List<ExchangePart> exchangePartsList = new ArrayList<>();
+        exchangePartsList.add(exchangePart);
+
+        return contract;
+    }
+
+    public Contract addingWorkToContract(long contractId,
+                                         Workmanship workmanship) {
+        LOGGER.info("Adding info to contract {}", contractId);
+
+        Contract contract = contractRepository.findById(contractId);
+
+        List<Workmanship> workmanshipList = new ArrayList<>();
+        workmanshipList.add(workmanship);
+
+        return contract;
+    }
+
+    public void deleteContract(long id) {
+        LOGGER.info("Deleting contract {}", id);
+        contractRepository.deleteById(id);
     }
 
 }

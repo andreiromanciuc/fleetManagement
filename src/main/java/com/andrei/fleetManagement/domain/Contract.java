@@ -1,6 +1,7 @@
 package com.andrei.fleetManagement.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,20 @@ public class Contract {
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private Partner partner;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name = "contract_id")
+    private List<ExchangePart> exchangePartList = new ArrayList<>();
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name = "contract_id")
+    private List<Workmanship> workmanshipList = new ArrayList<>();
 
     public Contract(Car car, Customer customer, Partner partner) {
         this.car = car;

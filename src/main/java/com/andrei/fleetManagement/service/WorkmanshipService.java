@@ -13,18 +13,23 @@ public class WorkmanshipService {
     private static final Logger LOGGER = LoggerFactory.getLogger(CarService.class);
 
     private final WorkmanshipRepository workmanshipRepository;
+    private final ContractService contractService;
 
-    public WorkmanshipService(WorkmanshipRepository workmanshipRepository) {
+    public WorkmanshipService(WorkmanshipRepository workmanshipRepository,
+                              ContractService contractService) {
         this.workmanshipRepository = workmanshipRepository;
+        this.contractService = contractService;
     }
 
-    public Workmanship createWorkmanship(CreateWorkmanship createWorkmanship) {
+    public Workmanship createWorkmanship(long id, CreateWorkmanship createWorkmanship) {
         LOGGER.info("Creating new workmanship");
         Workmanship workmanship = new Workmanship();
         workmanship.setCode(createWorkmanship.getCode());
         workmanship.setName(createWorkmanship.getName());
         workmanship.setTiming(createWorkmanship.getTiming());
         workmanship.setPrice(createWorkmanship.getPrice());
+
+        contractService.addingWorkToContract(id, workmanship);
 
         return workmanshipRepository.save(workmanship);
     }
@@ -51,11 +56,6 @@ public class WorkmanshipService {
         LOGGER.info("Retrieving workmanship {}", name);
         return workmanshipRepository.findByName(name);
     }
-
-//    public Workmanship getWorkmanshipByContractId(long contractId) {
-//        LOGGER.info("Retrieving workmanship by contract {}", contractId);
-//
-//    }
 
     public void deleteWorkmanship(long id) {
         LOGGER.info("Deleting workmanship {}", id);

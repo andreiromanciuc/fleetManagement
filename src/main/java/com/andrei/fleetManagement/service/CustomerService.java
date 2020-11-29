@@ -1,5 +1,6 @@
 package com.andrei.fleetManagement.service;
 
+import com.andrei.fleetManagement.domain.Contract;
 import com.andrei.fleetManagement.domain.Customer;
 import com.andrei.fleetManagement.exception.ResourceNotFoundExceptions;
 import com.andrei.fleetManagement.persistance.CustomerRepository;
@@ -7,6 +8,8 @@ import com.andrei.fleetManagement.transfer.CreateCustomer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CustomerService {
@@ -31,6 +34,16 @@ public class CustomerService {
         customer.setContactPerson(createCustomer.getContactPerson());
 
         return customerRepository.save(customer);
+    }
+
+    public Customer addContractToCustomer(long customerId, Contract contract) {
+        LOGGER.info("Adding contract to customer {}", customerId);
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new ResourceNotFoundExceptions("This customer was not found"));
+        List<Contract> contractList = customer.getContractList();
+        contractList.add(contract);
+
+        return customer;
     }
 
     public Customer getCustomerByName(String name) {

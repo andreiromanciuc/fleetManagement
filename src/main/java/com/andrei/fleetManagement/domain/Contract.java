@@ -15,18 +15,6 @@ public class Contract {
     private String startDate;
     private Date finishDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    private Car car;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    private Customer customer;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    private Partner partner;
-
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true
@@ -40,6 +28,15 @@ public class Contract {
     )
     @JoinColumn(name = "contract_id")
     private List<Workmanship> workmanshipList = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Customer customer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Partner partner;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Car car;
 
     public Contract(Car car, Customer customer, Partner partner) {
         this.car = car;
@@ -101,5 +98,21 @@ public class Contract {
 
     public void setPartner(Partner partner) {
         this.partner = partner;
+    }
+
+    public List<ExchangePart> getExchangePartList() {
+        return exchangePartList;
+    }
+
+    public void setExchangePartList(List<ExchangePart> exchangePartList) {
+        this.exchangePartList = exchangePartList;
+    }
+
+    public List<Workmanship> getWorkmanshipList() {
+        return workmanshipList;
+    }
+
+    public void setWorkmanshipList(List<Workmanship> workmanshipList) {
+        this.workmanshipList = workmanshipList;
     }
 }

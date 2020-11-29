@@ -1,5 +1,6 @@
 package com.andrei.fleetManagement.service;
 
+import com.andrei.fleetManagement.domain.Contract;
 import com.andrei.fleetManagement.domain.Partner;
 import com.andrei.fleetManagement.exception.ResourceNotFoundExceptions;
 import com.andrei.fleetManagement.persistance.PartnerRepository;
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,6 +34,16 @@ public class PartnerService {
         partner.setAddress(createPartner.getAddress());
         partner.setContactPerson(createPartner.getContactPerson());
         return partnerRepository.save(partner);
+    }
+
+    public Partner addingContractToPartner(long partnerId, Contract contract) {
+        LOGGER.info("Adding contract to partner {}", partnerId);
+        Partner partner = partnerRepository.findById(partnerId)
+                .orElseThrow(() -> new ResourceNotFoundExceptions("This partner was not found"));
+        List<Contract> contractList = partner.getContractList();
+        contractList.add(contract);
+
+        return partner;
     }
 
     public void deletePartner(long id) {

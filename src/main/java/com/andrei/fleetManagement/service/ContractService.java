@@ -3,13 +3,10 @@ package com.andrei.fleetManagement.service;
 import com.andrei.fleetManagement.domain.*;
 import com.andrei.fleetManagement.persistance.ContractRepository;
 import com.andrei.fleetManagement.transfer.CreateContract;
-import com.andrei.fleetManagement.transfer.CreateExchangePart;
-import com.andrei.fleetManagement.transfer.CreateWorkmanship;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.PushBuilder;
 import java.util.*;
 
 
@@ -54,6 +51,10 @@ public class ContractService {
         contract.setPartner(partner);
         contract.setStartDate(day + "/"+ month +"/"+ year);
 
+        partnerService.addingContractToPartner(partnerId, contract);
+        customerService.addContractToCustomer(customerId, contract);
+        carService.addingContractToCar(carId, contract);
+
         return contractRepository.save(contract);
     }
 
@@ -62,9 +63,19 @@ public class ContractService {
         LOGGER.info("Adding info to contract {}", contractId);
 
         Contract contract = contractRepository.findById(contractId);
+        List<ExchangePart> exchangePartList = contract.getExchangePartList();
+        exchangePartList.add(exchangePart);
 
-        List<ExchangePart> exchangePartsList = new ArrayList<>();
-        exchangePartsList.add(exchangePart);
+        return contract;
+    }
+
+    public Contract removeExchangePartFromList(long contractId,
+                                               ExchangePart exchangePart) {
+        LOGGER.info("Removing an exchange part from contract {}", contractId);
+        Contract contract = contractRepository.findById(contractId);
+        List<ExchangePart> exchangePartList = contract.getExchangePartList();
+
+        exchangePartList.remove(exchangePart);
 
         return contract;
     }
@@ -74,11 +85,15 @@ public class ContractService {
         LOGGER.info("Adding info to contract {}", contractId);
 
         Contract contract = contractRepository.findById(contractId);
-
-        List<Workmanship> workmanshipList = new ArrayList<>();
+        List<Workmanship> workmanshipList = contract.getWorkmanshipList();
         workmanshipList.add(workmanship);
 
         return contract;
+    }
+
+    public Contract getContractById(long id) {
+        LOGGER.info("Retrieving contract {}", id);
+        return contractRepository.findById(id);
     }
 
     public void deleteContract(long id) {

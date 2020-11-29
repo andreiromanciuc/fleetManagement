@@ -1,9 +1,6 @@
 package com.andrei.fleetManagement.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Workmanship {
@@ -15,6 +12,9 @@ public class Workmanship {
     private String name;
     private double timing;
     private double price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Contract contract;
 
     public long getId() {
         return id;
@@ -54,5 +54,13 @@ public class Workmanship {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 }

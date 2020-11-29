@@ -1,6 +1,7 @@
 package com.andrei.fleetManagement.service;
 
 import com.andrei.fleetManagement.domain.Car;
+import com.andrei.fleetManagement.domain.Contract;
 import com.andrei.fleetManagement.exception.ResourceNotFoundExceptions;
 import com.andrei.fleetManagement.persistance.CarRepository;
 import com.andrei.fleetManagement.transfer.CreateCar;
@@ -8,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarService {
@@ -30,6 +34,16 @@ public class CarService {
         newCar.setVinNumber(car.getVinNumber());
 
         return carRepository.save(newCar);
+    }
+
+    public Car addingContractToCar(long carId, Contract contract) {
+        LOGGER.info("Adding contract to the car {}", carId);
+        Car car = carRepository.findById(carId)
+                .orElseThrow(() -> new ResourceNotFoundExceptions("This car was not found"));
+        List<Contract> contractList = car.getContractList();
+        contractList.add(contract);
+
+        return car;
     }
 
     public Car getCarByPlateNumber(String plateNumber) {

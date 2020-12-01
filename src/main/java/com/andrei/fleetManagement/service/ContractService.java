@@ -51,13 +51,38 @@ public class ContractService {
         contract.setPartner(partner);
         contract.setStartDate(day + "/" + month + "/" + year);
         contract.setFinished(false);
+        contract.setOrderedParts(false);
 
         return contractRepository.save(contract);
+    }
+
+    public List<Contract> getUnfinishedContracts() {
+        LOGGER.info("Retrieving all unfinished contracts");
+        return contractRepository.findContractsByFinishedFalse();
     }
 
     public Contract getContractById(long id) {
         LOGGER.info("Retrieving contract {}", id);
         return contractRepository.findById(id);
+    }
+
+    public Contract setFixingAppointmentDate(long contractId, String date) {
+        LOGGER.info("Set appointment date {}", date);
+
+        Contract contract = getContractById(contractId);
+        contract.setStartFixCarDate(date);
+
+        return contract;
+    }
+
+    public Contract orderExchangePartsStatus(long id, String arrivalDate) {
+        LOGGER.info("Set exchange parts status to ordered, and arrival date for last exchange part");
+
+        Contract contract = getContractById(id);
+        contract.setOrderedParts(true);
+        contract.setArrivalPartsDate(arrivalDate);
+
+        return contract;
     }
 
     public void deleteContract(long id) {

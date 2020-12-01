@@ -1,9 +1,6 @@
 package com.andrei.fleetManagement.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Contract {
@@ -12,8 +9,12 @@ public class Contract {
     @GeneratedValue
     private long id;
     private boolean finished;
+    private boolean orderedParts;
     private String startDate;
-    private Date finishDate;
+    private String finishDate;
+    private String startFixCarDate;
+    private String arrivalPartsDate;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
@@ -58,11 +59,11 @@ public class Contract {
         this.startDate = startDate;
     }
 
-    public Date getFinishDate() {
+    public String getFinishDate() {
         return finishDate;
     }
 
-    public void setFinishDate(Date finishDate) {
+    public void setFinishDate(String finishDate) {
         this.finishDate = finishDate;
     }
 
@@ -90,4 +91,27 @@ public class Contract {
         this.partner = partner;
     }
 
+    public String getStartFixCarDate() {
+        return startFixCarDate;
+    }
+
+    public void setStartFixCarDate(String startFixCarDate) {
+        this.startFixCarDate = startFixCarDate;
+    }
+
+    public boolean isOrderedParts() {
+        return orderedParts;
+    }
+
+    public void setOrderedParts(boolean orderedParts) {
+        this.orderedParts = orderedParts;
+    }
+
+    public String getArrivalPartsDate() {
+        return arrivalPartsDate;
+    }
+
+    public void setArrivalPartsDate(String arrivalPartsDate) {
+        this.arrivalPartsDate = arrivalPartsDate;
+    }
 }

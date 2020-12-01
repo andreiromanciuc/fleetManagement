@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class ExchangePart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String code;
     private String name;

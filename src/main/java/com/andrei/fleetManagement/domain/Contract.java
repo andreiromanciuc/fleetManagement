@@ -38,6 +38,13 @@ public class Contract {
     @ManyToOne(fetch = FetchType.LAZY)
     private Car car;
 
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name = "contract_id")
+    private List<Message> messageList = new ArrayList<>();
+
     public Contract(Car car, Customer customer, Partner partner) {
         this.car = car;
         this.customer = customer;
@@ -114,5 +121,13 @@ public class Contract {
 
     public void setWorkmanshipList(List<Workmanship> workmanshipList) {
         this.workmanshipList = workmanshipList;
+    }
+
+    public List<Message> getMessageList() {
+        return messageList;
+    }
+
+    public void setMessageList(List<Message> messageList) {
+        this.messageList = messageList;
     }
 }

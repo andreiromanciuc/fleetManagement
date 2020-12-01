@@ -1,10 +1,6 @@
 package com.andrei.fleetManagement.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.*;
 
 @Entity
 public class Message {
@@ -12,8 +8,13 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private Date dateOfMessage;
+    private String dateOfMessage;
     private String content;
+    private String owner;
+    private boolean unread;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Contract contract;
 
     public long getId() {
         return id;
@@ -23,11 +24,11 @@ public class Message {
         this.id = id;
     }
 
-    public Date getDateOfMessage() {
+    public String getDateOfMessage() {
         return dateOfMessage;
     }
 
-    public void setDateOfMessage(Date dateOfMessage) {
+    public void setDateOfMessage(String dateOfMessage) {
         this.dateOfMessage = dateOfMessage;
     }
 
@@ -37,5 +38,29 @@ public class Message {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public boolean isUnread() {
+        return unread;
+    }
+
+    public void setUnread(boolean unread) {
+        this.unread = unread;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 }

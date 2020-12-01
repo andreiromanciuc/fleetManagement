@@ -17,6 +17,8 @@ public class Car {
     private String model;
     private long mileage;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Customer customer;
 
     public long getId() {
         return id;
@@ -58,4 +60,11 @@ public class Car {
         this.mileage = mileage;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }

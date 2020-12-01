@@ -26,7 +26,7 @@ public class CarServiceIntegrationTests {
         createCar.setVinNumber("WF0123459DF1233");
         createCar.setMileage(123456);
 
-        Car car = carService.createCar(createCar);
+        Car car = carService.createCar(1, createCar);
 
         assertThat(car, notNullValue());
         assertThat(car.getId(), greaterThan(0L));

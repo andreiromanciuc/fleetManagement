@@ -36,7 +36,7 @@ public class MessageService {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Bucharest"));
         calendar.setTime(date);
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH + 1);
+        int month = calendar.get(Calendar.MONTH) +1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         Message message = new Message();
@@ -64,7 +64,7 @@ public class MessageService {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Bucharest"));
         calendar.setTime(date);
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH + 1);
+        int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         message.setDateOfMessage(day + "/"+ month +"/"+ year);

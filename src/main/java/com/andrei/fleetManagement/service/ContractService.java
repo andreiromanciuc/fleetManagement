@@ -42,14 +42,15 @@ public class ContractService {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Bucharest"));
         calendar.setTime(date);
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) +1;
+        int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         Contract contract = new Contract(car, customer, partner);
         contract.setCar(car);
         contract.setCustomer(customer);
         contract.setPartner(partner);
-        contract.setStartDate(day + "/"+ month +"/"+ year);
+        contract.setStartDate(day + "/" + month + "/" + year);
+        contract.setFinished(false);
 
         return contractRepository.save(contract);
     }

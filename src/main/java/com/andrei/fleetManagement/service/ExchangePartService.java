@@ -1,5 +1,6 @@
 package com.andrei.fleetManagement.service;
 
+import com.andrei.fleetManagement.domain.Contract;
 import com.andrei.fleetManagement.domain.ExchangePart;
 import com.andrei.fleetManagement.exception.ResourceNotFoundExceptions;
 import com.andrei.fleetManagement.persistance.ExchangePartRepository;
@@ -7,6 +8,8 @@ import com.andrei.fleetManagement.transfer.CreateExchangePart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ExchangePartService {
@@ -21,15 +24,24 @@ public class ExchangePartService {
         this.contractService = contractService;
     }
 
-    public ExchangePart createExchangePart(long id, CreateExchangePart createExchangePart) {
+    public ExchangePart createExchangePart(long contractId, CreateExchangePart createExchangePart) {
         LOGGER.info("Creating exchange part");
+
+        Contract contract = contractService.getContractById(contractId);
+
         ExchangePart exchangePart = new ExchangePart();
         exchangePart.setCode(createExchangePart.getCode());
         exchangePart.setName(createExchangePart.getName());
         exchangePart.setQuantity(createExchangePart.getQuantity());
         exchangePart.setPrice(createExchangePart.getPrice());
+        exchangePart.setContract(contract);
 
         return exchangePartRepository.save(exchangePart);
+    }
+
+    public List<ExchangePart> getExchangePartByContract(Contract contract) {
+        LOGGER.info("Retrieving exchange parts for contract");
+        return exchangePartRepository.findByContract(contract);
     }
 
     public ExchangePart getExchangePartById(long id) {

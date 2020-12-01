@@ -16,6 +16,9 @@ public class Workmanship {
     @ManyToOne(fetch = FetchType.LAZY)
     private Contract contract;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Partner partner;
+
     public long getId() {
         return id;
     }
@@ -62,5 +65,13 @@ public class Workmanship {
 
     public void setContract(Contract contract) {
         this.contract = contract;
+    }
+
+    public Partner getPartner() {
+        return partner;
+    }
+
+    public void setPartner(Partner partner) {
+        this.partner = partner;
     }
 }

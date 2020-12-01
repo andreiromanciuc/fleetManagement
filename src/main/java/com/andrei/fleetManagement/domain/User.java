@@ -19,7 +19,7 @@ public class User {
     private String email;
     @NotNull
     private String password;
-    private long phoneNumber;
+    private String phoneNumber;
 
     public long getId() {
         return id;
@@ -53,11 +53,11 @@ public class User {
         this.password = password;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

@@ -5,7 +5,7 @@ public class CreateUser {
     private String name;
     private String email;
     private String password;
-    private long phoneNumber;
+    private String phoneNumber;
 
     public String getName() {
         return name;
@@ -31,11 +31,11 @@ public class CreateUser {
         this.password = password;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

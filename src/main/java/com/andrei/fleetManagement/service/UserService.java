@@ -19,6 +19,7 @@ public class UserService {
 
     public User createUser(CreateUser createUser) {
         LOGGER.info("Creating new user");
+
         User user = new User();
         user.setName(createUser.getName());
         user.setEmail(createUser.getEmail());

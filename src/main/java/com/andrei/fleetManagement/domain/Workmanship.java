@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Workmanship {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
     private String code;
     private String name;

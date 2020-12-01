@@ -10,7 +10,7 @@ import java.util.List;
 public class Partner {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
     @NotNull
     private String name;

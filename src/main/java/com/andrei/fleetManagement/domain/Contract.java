@@ -9,7 +9,7 @@ import java.util.List;
 public class Contract {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
     private boolean finished;
     private String startDate;

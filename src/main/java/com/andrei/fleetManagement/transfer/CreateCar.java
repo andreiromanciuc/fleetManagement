@@ -3,19 +3,10 @@ package com.andrei.fleetManagement.transfer;
 
 public class CreateCar {
 
-    private long id;
     private String plateNumber;
     private String vinNumber;
     private String model;
     private long mileage;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getPlateNumber() {
         return plateNumber;

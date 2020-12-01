@@ -10,7 +10,7 @@ import java.util.List;
 public class Car {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
     @NotNull
     private String plateNumber;

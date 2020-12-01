@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Message {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
     private String dateOfMessage;
     private String content;

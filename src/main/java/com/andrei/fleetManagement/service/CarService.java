@@ -27,7 +27,6 @@ public class CarService {
     public Car createCar(CreateCar car) {
         LOGGER.info("Creating new car");
         Car newCar = new Car();
-        newCar.setId(car.getId());
         newCar.setMileage(car.getMileage());
         newCar.setModel(car.getModel());
         newCar.setPlateNumber(car.getPlateNumber());
@@ -64,15 +63,15 @@ public class CarService {
                 .orElseThrow(() -> new ResourceNotFoundExceptions("Car "+id+ " is not existing"));
     }
 
-    public Car updateMileageOfTheCar(CreateCar car){
-        LOGGER.info("Updating mileage of the car {}", car.getId());
+    public Car updateMileageOfTheCar(long id, CreateCar car){
+        LOGGER.info("Updating mileage of the car {}", id);
         Car updatedCar = carRepository.findByVinNumber(car.getVinNumber());
         updatedCar.setMileage(car.getMileage());
         return carRepository.save(updatedCar);
     }
 
-    public Car updatePlaceNumberOfTheCar(CreateCar car){
-        LOGGER.info("Updating plate number of the car {}",car.getId());
+    public Car updatePlaceNumberOfTheCar(long id, CreateCar car){
+        LOGGER.info("Updating plate number of the car {}", id);
         Car byVinNumber = carRepository.findByVinNumber(car.getVinNumber());
         byVinNumber.setPlateNumber(car.getPlateNumber());
         return carRepository.save(byVinNumber);

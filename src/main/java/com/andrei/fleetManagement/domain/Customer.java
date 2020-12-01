@@ -29,12 +29,6 @@ public class Customer {
     @NotNull
     private String contactPerson;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JoinColumn(name = "customer_id")
-    private List<Contract> contractList = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -108,11 +102,4 @@ public class Customer {
         this.contactPerson = contactPerson;
     }
 
-    public List<Contract> getContractList() {
-        return contractList;
-    }
-
-    public void setContractList(List<Contract> contractList) {
-        this.contractList = contractList;
-    }
 }

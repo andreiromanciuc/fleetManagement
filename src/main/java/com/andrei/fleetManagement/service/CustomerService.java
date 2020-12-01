@@ -36,15 +36,15 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Customer addContractToCustomer(long customerId, Contract contract) {
-        LOGGER.info("Adding contract to customer {}", customerId);
-        Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new ResourceNotFoundExceptions("This customer was not found"));
-        List<Contract> contractList = customer.getContractList();
-        contractList.add(contract);
-
-        return customer;
-    }
+//    public Customer addContractToCustomer(long customerId, Contract contract) {
+//        LOGGER.info("Adding contract to customer {}", customerId);
+//        Customer customer = customerRepository.findById(customerId)
+//                .orElseThrow(() -> new ResourceNotFoundExceptions("This customer was not found"));
+//        List<Contract> contractList = customer.getContractList();
+//        contractList.add(contract);
+//
+//        return customer;
+//    }
 
     public Customer getCustomerByName(String name) {
         LOGGER.info("Retrieving customer by name {}", name);

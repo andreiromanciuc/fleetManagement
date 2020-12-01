@@ -3,8 +3,6 @@ package com.andrei.fleetManagement.domain;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Car {
@@ -19,12 +17,6 @@ public class Car {
     private String model;
     private long mileage;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JoinColumn(name = "car_id")
-    private List<Contract> contractList = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -66,11 +58,4 @@ public class Car {
         this.mileage = mileage;
     }
 
-    public List<Contract> getContractList() {
-        return contractList;
-    }
-
-    public void setContractList(List<Contract> contractList) {
-        this.contractList = contractList;
-    }
 }

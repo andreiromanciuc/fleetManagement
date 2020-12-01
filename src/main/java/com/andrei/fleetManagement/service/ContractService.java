@@ -42,7 +42,7 @@ public class ContractService {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Bucharest"));
         calendar.setTime(date);
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH + 1);
+        int month = calendar.get(Calendar.MONTH) +1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         Contract contract = new Contract(car, customer, partner);
@@ -51,44 +51,7 @@ public class ContractService {
         contract.setPartner(partner);
         contract.setStartDate(day + "/"+ month +"/"+ year);
 
-        partnerService.addingContractToPartner(partnerId, contract);
-        customerService.addContractToCustomer(customerId, contract);
-        carService.addingContractToCar(carId, contract);
-
         return contractRepository.save(contract);
-    }
-
-    public Contract addingPartsToContract(long contractId,
-                                          ExchangePart exchangePart) {
-        LOGGER.info("Adding info to contract {}", contractId);
-
-        Contract contract = contractRepository.findById(contractId);
-        List<ExchangePart> exchangePartList = contract.getExchangePartList();
-        exchangePartList.add(exchangePart);
-
-        return contract;
-    }
-
-    public Contract removeExchangePartFromList(long contractId,
-                                               ExchangePart exchangePart) {
-        LOGGER.info("Removing an exchange part from contract {}", contractId);
-        Contract contract = contractRepository.findById(contractId);
-        List<ExchangePart> exchangePartList = contract.getExchangePartList();
-
-        exchangePartList.remove(exchangePart);
-
-        return contract;
-    }
-
-    public Contract addingWorkToContract(long contractId,
-                                         Workmanship workmanship) {
-        LOGGER.info("Adding info to contract {}", contractId);
-
-        Contract contract = contractRepository.findById(contractId);
-        List<Workmanship> workmanshipList = contract.getWorkmanshipList();
-        workmanshipList.add(workmanship);
-
-        return contract;
     }
 
     public Contract getContractById(long id) {

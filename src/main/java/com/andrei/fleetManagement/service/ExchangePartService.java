@@ -29,8 +29,6 @@ public class ExchangePartService {
         exchangePart.setQuantity(createExchangePart.getQuantity());
         exchangePart.setPrice(createExchangePart.getPrice());
 
-        contractService.addingPartsToContract(id, exchangePart);
-
         return exchangePartRepository.save(exchangePart);
     }
 

@@ -35,15 +35,15 @@ public class PartnerService {
         return partnerRepository.save(partner);
     }
 
-    public Partner addingContractToPartner(long partnerId, Contract contract) {
-        LOGGER.info("Adding contract to partner {}", partnerId);
-        Partner partner = partnerRepository.findById(partnerId)
-                .orElseThrow(() -> new ResourceNotFoundExceptions("This partner was not found"));
-        List<Contract> contractList = partner.getContractList();
-        contractList.add(contract);
-
-        return partner;
-    }
+//    public Partner addingContractToPartner(long partnerId, Contract contract) {
+//        LOGGER.info("Adding contract to partner {}", partnerId);
+//        Partner partner = partnerRepository.findById(partnerId)
+//                .orElseThrow(() -> new ResourceNotFoundExceptions("This partner was not found"));
+//        List<Contract> contractList = partner.getContractList();
+//        contractList.add(contract);
+//
+//        return partner;
+//    }
 
     public void deletePartner(long id) {
         LOGGER.info("Deleting partner");

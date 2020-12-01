@@ -3,8 +3,6 @@ package com.andrei.fleetManagement.domain;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Partner {
@@ -28,13 +26,6 @@ public class Partner {
     private String address;
     @NotNull
     private String contactPerson;
-
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JoinColumn(name = "partner_id")
-    private List<Contract> contractList = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -108,11 +99,4 @@ public class Partner {
         this.contactPerson = contactPerson;
     }
 
-    public List<Contract> getContractList() {
-        return contractList;
-    }
-
-    public void setContractList(List<Contract> contractList) {
-        this.contractList = contractList;
-    }
 }

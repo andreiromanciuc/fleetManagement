@@ -29,8 +29,6 @@ public class WorkmanshipService {
         workmanship.setTiming(createWorkmanship.getTiming());
         workmanship.setPrice(createWorkmanship.getPrice());
 
-        contractService.addingWorkToContract(id, workmanship);
-
         return workmanshipRepository.save(workmanship);
     }
 

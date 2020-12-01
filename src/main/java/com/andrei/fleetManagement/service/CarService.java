@@ -35,15 +35,15 @@ public class CarService {
         return carRepository.save(newCar);
     }
 
-    public Car addingContractToCar(long carId, Contract contract) {
-        LOGGER.info("Adding contract to the car {}", carId);
-        Car car = carRepository.findById(carId)
-                .orElseThrow(() -> new ResourceNotFoundExceptions("This car was not found"));
-        List<Contract> contractList = car.getContractList();
-        contractList.add(contract);
-
-        return car;
-    }
+//    public Car addingContractToCar(long carId, Contract contract) {
+//        LOGGER.info("Adding contract to the car {}", carId);
+//        Car car = carRepository.findById(carId)
+//                .orElseThrow(() -> new ResourceNotFoundExceptions("This car was not found"));
+//        List<Contract> contractList = car.getContractList();
+//        contractList.add(contract);
+//
+//        return car;
+//    }
 
     public Car getCarByPlateNumber(String plateNumber) {
         LOGGER.info("Retrieving car by plate number");

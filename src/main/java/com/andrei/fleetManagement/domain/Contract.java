@@ -1,9 +1,7 @@
 package com.andrei.fleetManagement.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Contract {
@@ -15,20 +13,6 @@ public class Contract {
     private String startDate;
     private Date finishDate;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JoinColumn(name = "contract_id")
-    private List<ExchangePart> exchangePartList = new ArrayList<>();
-
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JoinColumn(name = "contract_id")
-    private List<Workmanship> workmanshipList = new ArrayList<>();
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
 
@@ -38,17 +22,14 @@ public class Contract {
     @ManyToOne(fetch = FetchType.LAZY)
     private Car car;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JoinColumn(name = "contract_id")
-    private List<Message> messageList = new ArrayList<>();
-
     public Contract(Car car, Customer customer, Partner partner) {
         this.car = car;
         this.customer = customer;
         this.partner = partner;
+    }
+
+    public Contract() {
+
     }
 
     public long getId() {
@@ -107,27 +88,4 @@ public class Contract {
         this.partner = partner;
     }
 
-    public List<ExchangePart> getExchangePartList() {
-        return exchangePartList;
-    }
-
-    public void setExchangePartList(List<ExchangePart> exchangePartList) {
-        this.exchangePartList = exchangePartList;
-    }
-
-    public List<Workmanship> getWorkmanshipList() {
-        return workmanshipList;
-    }
-
-    public void setWorkmanshipList(List<Workmanship> workmanshipList) {
-        this.workmanshipList = workmanshipList;
-    }
-
-    public List<Message> getMessageList() {
-        return messageList;
-    }
-
-    public void setMessageList(List<Message> messageList) {
-        this.messageList = messageList;
-    }
 }

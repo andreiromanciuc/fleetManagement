@@ -4,9 +4,12 @@ import com.andrei.fleetManagement.domain.Partner;
 import com.andrei.fleetManagement.exception.ResourceNotFoundExceptions;
 import com.andrei.fleetManagement.persistance.PartnerRepository;
 import com.andrei.fleetManagement.transfer.CreatePartner;
+import net.bytebuddy.agent.builder.AgentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -37,6 +40,11 @@ public class PartnerService {
     public void deletePartner(long id) {
         LOGGER.info("Deleting partner");
         partnerRepository.deleteById(id);
+    }
+
+    public List<Partner> getAllPartners() {
+        LOGGER.info("Retrieving all partners");
+        return partnerRepository.findAll();
     }
 
     public Partner getPartnerByName(String name) {

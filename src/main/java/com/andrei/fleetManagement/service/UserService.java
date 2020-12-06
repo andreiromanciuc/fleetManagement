@@ -29,9 +29,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User getUser(long id) {
+    public User getUserById(long id) {
         LOGGER.info("Retrieving user by id {}", id);
         return userRepository.getOne(id);
+    }
+
+    public User getUserByName(String name) {
+        LOGGER.info("Retrieving user by name {}", name);
+        return userRepository.findByName(name);
     }
 
     public void deleteUser(long id) {

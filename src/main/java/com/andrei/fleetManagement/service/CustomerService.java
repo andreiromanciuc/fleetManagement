@@ -46,6 +46,11 @@ public class CustomerService {
 //        return customer;
 //    }
 
+    public List<Customer> getAllCustomers() {
+        LOGGER.info("Retrieving all customers");
+        return customerRepository.findAll();
+    }
+
     public Customer getCustomerByName(String name) {
         LOGGER.info("Retrieving customer by name {}", name);
         return customerRepository.findByName(name);

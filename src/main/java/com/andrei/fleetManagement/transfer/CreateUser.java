@@ -2,17 +2,19 @@ package com.andrei.fleetManagement.transfer;
 
 public class CreateUser {
 
-    private String name;
+    private String username;
     private String email;
     private String password;
     private String phoneNumber;
+    private String role;
+    private String permission;
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -37,5 +39,21 @@ public class CreateUser {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 }

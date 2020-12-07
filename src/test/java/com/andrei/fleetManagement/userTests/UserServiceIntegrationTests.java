@@ -3,6 +3,7 @@ package com.andrei.fleetManagement.userTests;
 import com.andrei.fleetManagement.domain.User;
 import com.andrei.fleetManagement.service.UserService;
 import com.andrei.fleetManagement.transfer.CreateUser;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,18 +22,20 @@ public class UserServiceIntegrationTests {
     @Test
     public void createUser_whenValidRequest_thenUserIsCreated() {
         CreateUser createUser = new CreateUser();
-        createUser.setName("test");
+        createUser.setUsername("test");
         createUser.setEmail("test@test.com");
         createUser.setPassword("test");
         createUser.setPhoneNumber("000000");
+        createUser.setPermission("");
+        createUser.setRole("USER");
 
         User user = userService.createUser(createUser);
 
         assertThat(user, notNullValue());
         assertThat(user.getId(), greaterThan(0L));
-        assertThat(user.getName(), is(createUser.getName()));
+        assertThat(user.getUsername(), is(createUser.getUsername()));
         assertThat(user.getEmail(), is(createUser.getEmail()));
-        assertThat(user.getPassword(), is(createUser.getPassword()));
+        assertThat(user.getPassword(), Matchers.not(createUser.getPassword()));
         assertThat(user.getPhoneNumber(), is(createUser.getPhoneNumber()));
     }
 

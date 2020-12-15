@@ -20,25 +20,13 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-//    @Override
-//    public void run(String... args) throws Exception {
-//
-//        User user = new User("user", passwordEncoder.encode("user"), "USER", "");
-//        User customer = new User("customer", passwordEncoder.encode("customer"), "CUSTOMER", "");
-//        User partner = new User("partner", passwordEncoder.encode("partner"), "PARTNER", "");
-//
-//        List<User> users = Arrays.asList(user, customer, partner);
-//
-//        this.userRepository.saveAll(users);
-//    }
-
     public User createUser(CreateUser createUser) {
         LOGGER.info("Creating new user");
 
         User user = new User(createUser.getUsername(), passwordEncoder.encode(createUser.getPassword()), createUser.getRole(), createUser.getPermission());
         user.setPhoneNumber(createUser.getPhoneNumber());
         user.setActive(1);
-        user.setUsername(createUser.getUsername());
+        user.setUsername(createUser.getEmail());
         user.setEmail(createUser.getEmail());
 
         return userRepository.save(user);

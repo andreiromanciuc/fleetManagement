@@ -34,6 +34,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/partner/**").hasAnyRole("PARTNER", "USER")
                 .and()
                 .httpBasic();
+//                .formLogin()
+//                .loginPage("http://localhost:4200/");
     }
 
     @Bean

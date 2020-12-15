@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.*;
 
 
@@ -52,6 +53,42 @@ public class ContractService {
         contract.setStartDate(day + "/" + month + "/" + year);
         contract.setFinished(false);
         contract.setOrderedParts(false);
+        contract.setCreatedBy(Principal.class.getName());
+
+        return contractRepository.save(contract);
+    }
+
+    public Contract updateCarOfTheContract(long contractId, long carId) {
+        LOGGER.info("Updating contract by id {}", contractId);
+        Contract contract = contractRepository.findById(contractId);
+        Car car = carService.getCarById(carId);
+        contract.setCar(car);
+
+        List<String> updatedByList = contract.getUpdatedBy();
+        updatedByList.add(Principal.class.getName());
+
+        return contractRepository.save(contract);
+    }
+
+    public Contract updateContract(long contractId) {
+        LOGGER.info("Updating contract by id {}", contractId);
+        Contract contract = contractRepository.findById(contractId);
+
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Bucharest"));
+        calendar.setTime(date);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        List<Object> updatedDateList = contract.getUpdatedDate();
+        updatedDateList.add(day + "/" + month + "/" + year);
+
+        List<String> updatedByList = contract.getUpdatedBy();
+        updatedByList.add(Principal.class.getName());
+
+
+
 
         return contractRepository.save(contract);
     }

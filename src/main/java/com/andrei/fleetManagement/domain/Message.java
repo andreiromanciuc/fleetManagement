@@ -12,6 +12,7 @@ public class Message {
     private String content;
     private String owner;
     private boolean unread;
+    private String createdBy;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Contract contract;
@@ -54,6 +55,14 @@ public class Message {
 
     public void setUnread(boolean unread) {
         this.unread = unread;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
     public Contract getContract() {

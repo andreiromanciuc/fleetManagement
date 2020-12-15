@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+
 
 @Service
 public class CarService {
@@ -30,6 +32,7 @@ public class CarService {
         newCar.setPlateNumber(car.getPlateNumber());
         newCar.setVinNumber(car.getVinNumber());
         newCar.setCustomer(customerService.getCustomerById(customerId));
+        newCar.setCreatedBy(Principal.class.getName());
 
         return carRepository.save(newCar);
     }

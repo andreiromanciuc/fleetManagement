@@ -1,6 +1,7 @@
 package com.andrei.fleetManagement.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Contract {
@@ -14,7 +15,15 @@ public class Contract {
     private String finishDate;
     private String startFixCarDate;
     private String arrivalPartsDate;
-
+    private String createdBy;
+    @ElementCollection
+    private List<Object> updatedDate;
+    @ElementCollection
+    private List<String> updatedBy;
+    @ElementCollection
+    private List<Object> exchangeParts;
+    @ElementCollection
+    private List<Object> workmanship;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
@@ -32,7 +41,6 @@ public class Contract {
     }
 
     public Contract() {
-
     }
 
     public long getId() {
@@ -51,6 +59,14 @@ public class Contract {
         this.finished = finished;
     }
 
+    public boolean isOrderedParts() {
+        return orderedParts;
+    }
+
+    public void setOrderedParts(boolean orderedParts) {
+        this.orderedParts = orderedParts;
+    }
+
     public String getStartDate() {
         return startDate;
     }
@@ -67,12 +83,60 @@ public class Contract {
         this.finishDate = finishDate;
     }
 
-    public Car getCar() {
-        return car;
+    public String getStartFixCarDate() {
+        return startFixCarDate;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setStartFixCarDate(String startFixCarDate) {
+        this.startFixCarDate = startFixCarDate;
+    }
+
+    public String getArrivalPartsDate() {
+        return arrivalPartsDate;
+    }
+
+    public void setArrivalPartsDate(String arrivalPartsDate) {
+        this.arrivalPartsDate = arrivalPartsDate;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public List<Object> getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(List<Object> updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public List<String> getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(List<String> updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public List<Object> getExchangeParts() {
+        return exchangeParts;
+    }
+
+    public void setExchangeParts(List<Object> exchangeParts) {
+        this.exchangeParts = exchangeParts;
+    }
+
+    public List<Object> getWorkmanship() {
+        return workmanship;
+    }
+
+    public void setWorkmanship(List<Object> workmanship) {
+        this.workmanship = workmanship;
     }
 
     public Customer getCustomer() {
@@ -91,27 +155,11 @@ public class Contract {
         this.partner = partner;
     }
 
-    public String getStartFixCarDate() {
-        return startFixCarDate;
+    public Car getCar() {
+        return car;
     }
 
-    public void setStartFixCarDate(String startFixCarDate) {
-        this.startFixCarDate = startFixCarDate;
-    }
-
-    public boolean isOrderedParts() {
-        return orderedParts;
-    }
-
-    public void setOrderedParts(boolean orderedParts) {
-        this.orderedParts = orderedParts;
-    }
-
-    public String getArrivalPartsDate() {
-        return arrivalPartsDate;
-    }
-
-    public void setArrivalPartsDate(String arrivalPartsDate) {
-        this.arrivalPartsDate = arrivalPartsDate;
+    public void setCar(Car car) {
+        this.car = car;
     }
 }

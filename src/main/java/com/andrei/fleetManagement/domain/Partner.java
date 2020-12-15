@@ -3,6 +3,7 @@ package com.andrei.fleetManagement.domain;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Partner {
@@ -26,6 +27,9 @@ public class Partner {
     private String address;
     @NotNull
     private String contactPerson;
+    private String createdBy;
+    @ElementCollection
+    private List<String> updatedBy;
 
     public long getId() {
         return id;
@@ -99,4 +103,19 @@ public class Partner {
         this.contactPerson = contactPerson;
     }
 
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public List<String> getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(List<String> updatedBy) {
+        this.updatedBy = updatedBy;
+    }
 }

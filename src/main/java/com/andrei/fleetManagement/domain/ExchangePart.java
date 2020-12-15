@@ -1,6 +1,7 @@
 package com.andrei.fleetManagement.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class ExchangePart {
@@ -12,6 +13,9 @@ public class ExchangePart {
     private String name;
     private double quantity;
     private double price;
+    private String createdBy;
+    @ElementCollection
+    private List<String> updatedBy;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Contract contract;
@@ -54,6 +58,22 @@ public class ExchangePart {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public List<String> getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(List<String> updatedBy) {
+        this.updatedBy = updatedBy;
     }
 
     public Contract getContract() {

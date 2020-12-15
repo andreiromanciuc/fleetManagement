@@ -3,6 +3,7 @@ package com.andrei.fleetManagement.domain;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Car {
@@ -16,6 +17,9 @@ public class Car {
     private String vinNumber;
     private String model;
     private long mileage;
+    private String createdBy;
+    @ElementCollection
+    private List<String> updatedBy;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
@@ -58,6 +62,22 @@ public class Car {
 
     public void setMileage(long mileage) {
         this.mileage = mileage;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public List<String> getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(List<String> updatedBy) {
+        this.updatedBy = updatedBy;
     }
 
     public Customer getCustomer() {

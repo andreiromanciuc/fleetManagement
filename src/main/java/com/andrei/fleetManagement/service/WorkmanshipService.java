@@ -26,8 +26,7 @@ public class WorkmanshipService {
         this.partnerService = partnerService;
     }
 
-    public Workmanship createWorkmanship(long contractId,
-                                         long partnerId,
+    public Workmanship createWorkmanship(long partnerId,
                                          CreateWorkmanship createWorkmanship) {
         LOGGER.info("Creating new workmanship");
 
@@ -36,7 +35,6 @@ public class WorkmanshipService {
         workmanship.setName(createWorkmanship.getName());
         workmanship.setTiming(createWorkmanship.getTiming());
         workmanship.setPrice(createWorkmanship.getPrice());
-        workmanship.setContract(contractService.getContractById(contractId));
         workmanship.setPartner(partnerService.getPartnerById(partnerId));
 
         return workmanshipRepository.save(workmanship);

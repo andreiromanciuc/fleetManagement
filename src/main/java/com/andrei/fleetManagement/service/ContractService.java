@@ -58,6 +58,23 @@ public class ContractService {
         return contractRepository.save(contract);
     }
 
+    public Contract addExchangePartToContract(long contractId, ExchangePart exchangePart) {
+        LOGGER.info("Adding exchange part to contract {}", contractId);
+        Contract contract = contractRepository.findById(contractId);
+        List<ExchangePart> exchangePartList = contract.getExchangePartList();
+        exchangePartList.add(exchangePart);
+
+        return contractRepository.save(contract);
+    }
+
+    public Contract addWorkmanshipToContract(long contractId, Workmanship workmanship) {
+        LOGGER.info("Adding workmanship to contract {}", contractId);
+        Contract contract = contractRepository.findById(contractId);
+        List<Workmanship> workmanshipList = contract.getWorkmanshipList();
+        workmanshipList.add(workmanship);
+
+        return contractRepository.save(contract);
+    }
     public Contract updateCarOfTheContract(long contractId, long carId) {
         LOGGER.info("Updating contract by id {}", contractId);
         Contract contract = contractRepository.findById(contractId);
@@ -80,15 +97,13 @@ public class ContractService {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String dateString = day + "/" + month + "/" + "/" + year;
 
-        List<Object> updatedDateList = contract.getUpdatedDate();
-        updatedDateList.add(day + "/" + month + "/" + year);
+        List<String> updatedDateList = contract.getUpdatedDate();
+        updatedDateList.add(dateString);
 
         List<String> updatedByList = contract.getUpdatedBy();
         updatedByList.add(Principal.class.getName());
-
-
-
 
         return contractRepository.save(contract);
     }

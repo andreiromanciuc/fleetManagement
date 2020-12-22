@@ -17,13 +17,13 @@ public class Contract {
     private String arrivalPartsDate;
     private String createdBy;
     @ElementCollection
-    private List<Object> updatedDate;
+    private List<String> updatedDate;
     @ElementCollection
     private List<String> updatedBy;
-    @ElementCollection
-    private List<Object> exchangeParts;
-    @ElementCollection
-    private List<Object> workmanship;
+    @OneToMany
+    private List<ExchangePart> exchangePartList;
+    @OneToMany
+    private List<Workmanship> workmanshipList;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
@@ -107,11 +107,11 @@ public class Contract {
         this.createdBy = createdBy;
     }
 
-    public List<Object> getUpdatedDate() {
+    public List<String> getUpdatedDate() {
         return updatedDate;
     }
 
-    public void setUpdatedDate(List<Object> updatedDate) {
+    public void setUpdatedDate(List<String> updatedDate) {
         this.updatedDate = updatedDate;
     }
 
@@ -121,22 +121,6 @@ public class Contract {
 
     public void setUpdatedBy(List<String> updatedBy) {
         this.updatedBy = updatedBy;
-    }
-
-    public List<Object> getExchangeParts() {
-        return exchangeParts;
-    }
-
-    public void setExchangeParts(List<Object> exchangeParts) {
-        this.exchangeParts = exchangeParts;
-    }
-
-    public List<Object> getWorkmanship() {
-        return workmanship;
-    }
-
-    public void setWorkmanship(List<Object> workmanship) {
-        this.workmanship = workmanship;
     }
 
     public Customer getCustomer() {
@@ -161,5 +145,21 @@ public class Contract {
 
     public void setCar(Car car) {
         this.car = car;
+    }
+
+    public List<ExchangePart> getExchangePartList() {
+        return exchangePartList;
+    }
+
+    public void setExchangePartList(List<ExchangePart> exchangePartList) {
+        this.exchangePartList = exchangePartList;
+    }
+
+    public List<Workmanship> getWorkmanshipList() {
+        return workmanshipList;
+    }
+
+    public void setWorkmanshipList(List<Workmanship> workmanshipList) {
+        this.workmanshipList = workmanshipList;
     }
 }

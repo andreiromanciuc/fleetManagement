@@ -33,7 +33,7 @@ public class UserServiceIntegrationTests {
 
         assertThat(user, notNullValue());
         assertThat(user.getId(), greaterThan(0L));
-        assertThat(user.getUsername(), is(createUser.getUsername()));
+        assertThat(user.getUsername(), is(createUser.getEmail()));
         assertThat(user.getEmail(), is(createUser.getEmail()));
         assertThat(user.getPassword(), Matchers.not(createUser.getPassword()));
         assertThat(user.getPhoneNumber(), is(createUser.getPhoneNumber()));

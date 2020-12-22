@@ -16,11 +16,6 @@ public class WorkmanshipController {
         this.workmanshipService = workmanshipService;
     }
 
-    @PostMapping
-    public Workmanship createWorkmanship(@RequestParam long contractId,
-                                         @RequestParam long partnerId,
-                                         @RequestBody CreateWorkmanship createWorkmanship) {
-      return workmanshipService.createWorkmanship(contractId, partnerId, createWorkmanship);
-    }
+
 
 }

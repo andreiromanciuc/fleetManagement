@@ -33,6 +33,7 @@ public class CarService {
         newCar.setVinNumber(car.getVinNumber());
         newCar.setCustomer(customerService.getCustomerById(customerId));
         newCar.setCreatedBy(Principal.class.getName());
+        newCar.setType(car.getType());
 
         return carRepository.save(newCar);
     }

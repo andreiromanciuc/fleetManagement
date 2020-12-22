@@ -7,6 +7,7 @@ public class CreateCar {
     private String vinNumber;
     private String model;
     private long mileage;
+    private String type;
 
     public String getPlateNumber() {
         return plateNumber;
@@ -38,5 +39,13 @@ public class CreateCar {
 
     public void setMileage(long mileage) {
         this.mileage = mileage;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

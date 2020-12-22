@@ -14,6 +14,8 @@ public class ExchangePart {
     private double quantity;
     private double price;
     private String createdBy;
+    private String carModel;
+    private String carType;
     @ElementCollection
     private List<String> updatedBy;
 
@@ -66,6 +68,22 @@ public class ExchangePart {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public String getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
     }
 
     public List<String> getUpdatedBy() {

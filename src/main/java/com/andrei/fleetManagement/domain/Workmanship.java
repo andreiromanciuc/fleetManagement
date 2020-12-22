@@ -14,6 +14,8 @@ public class Workmanship {
     private double timing;
     private double price;
     private String createdBy;
+    private String carModel;
+    private String carType;
 
     @ElementCollection
     private List<String> updatedBy;
@@ -78,6 +80,22 @@ public class Workmanship {
 
     public void setUpdatedBy(List<String> updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public String getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
     }
 
     public Contract getContract() {

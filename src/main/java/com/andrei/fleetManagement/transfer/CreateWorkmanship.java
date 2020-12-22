@@ -6,6 +6,8 @@ public class CreateWorkmanship {
     private String name;
     private double timing;
     private double price;
+    private String carModel;
+    private String carType;
 
     public String getCode() {
         return code;
@@ -37,5 +39,21 @@ public class CreateWorkmanship {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
     }
 }

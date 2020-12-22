@@ -16,6 +16,7 @@ public class Car {
     @NotNull
     private String vinNumber;
     private String model;
+    private String type;
     private long mileage;
     private String createdBy;
     @ElementCollection
@@ -86,5 +87,13 @@ public class Car {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

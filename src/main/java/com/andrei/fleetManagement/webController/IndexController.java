@@ -10,7 +10,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/")
+@RequestMapping("/index")
 public class IndexController {
 
     private final ContractService contractService;

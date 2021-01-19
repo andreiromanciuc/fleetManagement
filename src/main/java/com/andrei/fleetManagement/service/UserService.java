@@ -5,6 +5,7 @@ import com.andrei.fleetManagement.persistance.UserRepository;
 import com.andrei.fleetManagement.transfer.CreateUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,11 @@ public class UserService {
     public User createUser(CreateUser createUser) {
         LOGGER.info("Creating new user");
 
-        User user = new User(createUser.getUsername(), passwordEncoder.encode(createUser.getPassword()), createUser.getRole(), createUser.getPermission());
+        User user = new User(createUser.getUsername(),
+                passwordEncoder.encode(createUser.getPassword()),
+                createUser.getRole(),
+                createUser.getPermission());
+
         user.setPhoneNumber(createUser.getPhoneNumber());
         user.setActive(1);
         user.setUsername(createUser.getEmail());
@@ -39,7 +44,8 @@ public class UserService {
 
     public User getUserByName(String name) {
         LOGGER.info("Retrieving user by name {}", name);
-        return userRepository.findByUsername(name);
+        return userRepository.findByUsername(name)
+                .orElseThrow(() -> new UsernameNotFoundException("This user " + name + " does not exist"));
     }
 
     public void deleteUser(long id) {

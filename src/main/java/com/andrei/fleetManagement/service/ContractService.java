@@ -5,6 +5,8 @@ import com.andrei.fleetManagement.persistance.ContractRepository;
 import com.andrei.fleetManagement.transfer.CreateContract;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -30,14 +32,11 @@ public class ContractService {
         this.partnerService = partnerService;
     }
 
-    public Contract createContract(CreateContract createContract,
-                                   long carId,
-                                   long customerId,
-                                   long partnerId) {
+    public Contract createContract(CreateContract createContract) {
         LOGGER.info("Creating contract");
-        Partner partner = partnerService.getPartnerById(partnerId);
-        Customer customer = customerService.getCustomerById(customerId);
-        Car car = carService.getCarById(carId);
+        Partner partner = partnerService.getPartnerById(createContract.getPartnerId());
+        Customer customer = customerService.getCustomerById(createContract.getCustomerId());
+        Car car = carService.getCarById(createContract.getCarId());
 
         Date date = new Date();
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Bucharest"));
@@ -53,7 +52,8 @@ public class ContractService {
         contract.setStartDate(day + "/" + month + "/" + year);
         contract.setFinished(false);
         contract.setOrderedParts(false);
-        contract.setCreatedBy(Principal.class.getName());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        contract.setCreatedBy(authentication.getName());
 
         return contractRepository.save(contract);
     }
@@ -82,7 +82,9 @@ public class ContractService {
         contract.setCar(car);
 
         List<String> updatedByList = contract.getUpdatedBy();
-        updatedByList.add(Principal.class.getName());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        updatedByList.add(authentication.getName());
 
         return contractRepository.save(contract);
     }
@@ -103,7 +105,9 @@ public class ContractService {
         updatedDateList.add(dateString);
 
         List<String> updatedByList = contract.getUpdatedBy();
-        updatedByList.add(Principal.class.getName());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        updatedByList.add(authentication.getName());
 
         return contractRepository.save(contract);
     }

@@ -21,14 +21,6 @@ public class IndexController {
         this.workmanshipService = workmanshipService;
     }
 
-    @PostMapping
-    public Contract createContract(@RequestBody CreateContract createContract,
-                                   @RequestParam long carId,
-                                   @RequestParam long customerId,
-                                   @RequestParam long partnerId) {
-        return contractService.createContract(createContract, carId, customerId, partnerId);
-    }
-
     @GetMapping
     public List<Contract> getOpenedContracts() {
         return contractService.getUnfinishedContracts();

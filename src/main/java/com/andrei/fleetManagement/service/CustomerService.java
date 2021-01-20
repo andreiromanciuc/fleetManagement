@@ -2,11 +2,14 @@ package com.andrei.fleetManagement.service;
 
 import com.andrei.fleetManagement.domain.Contract;
 import com.andrei.fleetManagement.domain.Customer;
+import com.andrei.fleetManagement.domain.User;
 import com.andrei.fleetManagement.exception.ResourceNotFoundExceptions;
 import com.andrei.fleetManagement.persistance.CustomerRepository;
 import com.andrei.fleetManagement.transfer.CreateCustomer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +24,8 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer createCustomer(CreateCustomer createCustomer) {
-        LOGGER.info("Created customer");
+    public Customer createCustomer(CreateCustomer createCustomer, User user) {
+        LOGGER.info("Creating new customer");
         Customer customer = new Customer();
         customer.setName(createCustomer.getName());
         customer.setEmail(createCustomer.getEmail());
@@ -32,6 +35,10 @@ public class CustomerService {
         customer.setBankAccount(createCustomer.getBankAccount());
         customer.setAddress(createCustomer.getAddress());
         customer.setContactPerson(createCustomer.getContactPerson());
+        customer.setUser(user);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        customer.setCreatedBy(authentication.getName());
 
         return customerRepository.save(customer);
     }

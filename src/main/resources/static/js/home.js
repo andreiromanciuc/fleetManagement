@@ -6,7 +6,7 @@ window.Home = {
             url: Home.API_URL + "/user",
             method: "GET"
         }).done(function (response) {
-            console.log(response);
+            // console.log(response);
             $("#user-info").html(Home.displayUser(response));
             $(".personal-data").html(Home.displayUserInNav(response));
         })

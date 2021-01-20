@@ -29,6 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                // TODO de verificat accesul pe roluri
                 .antMatchers("/user").hasRole("USER")
                 .antMatchers("/customer").hasAnyRole("CUSTOMER", "USER")
                 .antMatchers("/partner").hasAnyRole("PARTNER", "USER")

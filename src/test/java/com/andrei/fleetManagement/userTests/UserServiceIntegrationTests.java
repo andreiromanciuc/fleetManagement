@@ -22,12 +22,12 @@ public class UserServiceIntegrationTests {
     @Test
     public void createUser_whenValidRequest_thenUserIsCreated() {
         CreateUser createUser = new CreateUser();
-        createUser.setUsername("customer");
-        createUser.setEmail("customer@customer.com");
-        createUser.setPassword("customer");
+        createUser.setUsername("user");
+        createUser.setEmail("user@user.com");
+        createUser.setPassword("user");
         createUser.setPhoneNumber("000000");
         createUser.setPermission("");
-        createUser.setRole("CUSTOMER");
+        createUser.setRole("USER");
 
         User user = userService.createUser(createUser);
 

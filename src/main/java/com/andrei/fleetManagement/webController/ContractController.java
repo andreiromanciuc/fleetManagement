@@ -45,21 +45,4 @@ public class ContractController {
         return contractService.addExchangePartToContract(contractId, exchangePart);
     }
 
-    @PutMapping
-    public Contract addWorkmanshipToContract(@RequestParam long contractId,
-                                             @RequestParam long partnerId,
-                                             @RequestParam String code,
-                                             @RequestParam String name,
-                                             @RequestParam double timing,
-                                             @RequestParam double price) {
-
-        CreateWorkmanship createWorkmanship = new CreateWorkmanship();
-        createWorkmanship.setCode(code);
-        createWorkmanship.setName(name);
-        createWorkmanship.setTiming(timing);
-        createWorkmanship.setPrice(price);
-
-        return contractService.addWorkmanshipToContract(contractId,
-                workmanshipService.createWorkmanship(partnerId, createWorkmanship));
-    }
 }

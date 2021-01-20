@@ -29,24 +29,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("home/user/**").hasRole("USER")
-                .antMatchers("home/customer/**").hasAnyRole("CUSTOMER", "USER")
-                .antMatchers("home/partner/**").hasAnyRole("PARTNER", "USER")
+                .antMatchers("/user").hasRole("USER")
+                .antMatchers("/customer").hasAnyRole("CUSTOMER", "USER")
+                .antMatchers("/partner").hasAnyRole("PARTNER", "USER")
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
-//                .formLogin()
-//                    .loginPage("/login").permitAll()
-//                    .defaultSuccessUrl("/home")
-//                .and()
-//                .logout()
-//                    .logoutUrl("/logout")
-//                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-//                    .clearAuthentication(true)
-//                    .invalidateHttpSession(true)
-//                    .deleteCookies("JSESSIONID")
-//                    .logoutSuccessUrl("/login");
+//                .httpBasic();
+                .formLogin()
+                    .loginPage("/login").permitAll()
+                    .defaultSuccessUrl("/home")
+                .and()
+                .logout()
+                    .logoutUrl("/logout")
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                    .clearAuthentication(true)
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
+                    .logoutSuccessUrl("/login");
 
     }
 

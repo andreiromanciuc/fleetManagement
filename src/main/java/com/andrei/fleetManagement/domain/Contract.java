@@ -16,6 +16,8 @@ public class Contract {
     private String startFixCarDate;
     private String arrivalPartsDate;
     private String createdBy;
+    private String closedBy;
+    private String branch;
     @ElementCollection
     private List<String> updatedDate;
     @ElementCollection
@@ -161,5 +163,21 @@ public class Contract {
 
     public void setWorkmanshipList(List<Workmanship> workmanshipList) {
         this.workmanshipList = workmanshipList;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getClosedBy() {
+        return closedBy;
+    }
+
+    public void setClosedBy(String closedBy) {
+        this.closedBy = closedBy;
     }
 }

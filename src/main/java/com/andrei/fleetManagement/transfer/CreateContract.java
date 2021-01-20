@@ -5,6 +5,7 @@ public class CreateContract {
     private int carId;
     private int customerId;
     private int partnerId;
+    private String branch;
 
 
     public boolean isFinished() {
@@ -37,5 +38,13 @@ public class CreateContract {
 
     public void setPartnerId(int partnerId) {
         this.partnerId = partnerId;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 }

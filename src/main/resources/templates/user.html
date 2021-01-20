@@ -18,10 +18,10 @@
                 <a class="nav-link" href="/user">IC - User <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8081/customer">Client</a>
+                <a class="nav-link" href="http://localhost:8081/home/customer">Client</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8081/partner">Partener</a>
+                <a class="nav-link" href="http://localhost:8081/home/partner">Partener</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" style="margin-right: 200px">
@@ -39,11 +39,19 @@
         </form>
     </div>
 </nav>
-<h1>Bine ati revenit</h1>
-<h2 id="user-info"></h2>
+<div style="margin-left: 15px; margin-top: 10px" id="container">
+    <button type="button" class="btn btn-outline-warning" id="unfinished-contracts-btn">Unfinished Contracts</button>
+    <button type="button" class="btn btn-outline-success" id="new-contract-btn">New Contract</button>
+    <button type="button" class="btn btn-outline-info" id="new-customer-btn">Create Customer</button>
+    <button type="button" class="btn btn-outline-secondary" id="new-partner-btn">Create Partner</button>
+</div>
+
+<div id="table-display">
+
+</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="js/home.js"></script>
+<script src="js/user.js"></script>
 </html>
 
 

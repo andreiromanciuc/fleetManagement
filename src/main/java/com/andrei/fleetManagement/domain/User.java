@@ -26,14 +26,14 @@ public class User {
 
     private int active;
 
-    private String roles = "";
+    private String role = "";
 
     private String permissions = "";
 
-    public User(String username, String password, String roles, String permissions) {
+    public User(String username, String password, String role, String permissions) {
         this.username = username;
         this.password = password;
-        this.roles = roles;
+        this.role = role;
         this.permissions = permissions;
         this.active = 1;
     }
@@ -88,12 +88,12 @@ public class User {
         this.active = active;
     }
 
-    public String getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setRole(String roles) {
+        this.role = roles;
     }
 
     public String getPermissions() {
@@ -105,8 +105,8 @@ public class User {
     }
 
     public List<String> getRoleList() {
-        if (this.roles.length() > 0) {
-            return Arrays.asList(this.roles.split(","));
+        if (this.role.length() > 0) {
+            return Arrays.asList(this.role.split(","));
         }
         return new ArrayList<>();
     }

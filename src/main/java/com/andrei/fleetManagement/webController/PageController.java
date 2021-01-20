@@ -17,4 +17,9 @@ public class PageController {
     public String getHomeView() {
         return "home";
     }
+
+    @GetMapping("user")
+    public String getUserView() {
+        return "user";
+    }
 }

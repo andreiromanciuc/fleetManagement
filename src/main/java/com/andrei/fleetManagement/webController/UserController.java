@@ -8,6 +8,7 @@ import com.andrei.fleetManagement.service.ContractService;
 import com.andrei.fleetManagement.service.CustomerService;
 import com.andrei.fleetManagement.service.PartnerService;
 import com.andrei.fleetManagement.service.UserService;
+import com.andrei.fleetManagement.transfer.CreateContract;
 import com.andrei.fleetManagement.transfer.CreateCustomer;
 import com.andrei.fleetManagement.transfer.CreatePartner;
 import com.andrei.fleetManagement.transfer.CreateUser;
@@ -72,5 +73,10 @@ public class UserController {
         User user = userService.createUser(createUser);
 
         return partnerService.createPartner(createPartner, user);
+    }
+
+    @PostMapping("/contract")
+    public Contract createContract(CreateContract createContract){
+        return contractService.createContract(createContract);
     }
 }

@@ -49,9 +49,10 @@ public class ContractService {
         contract.setCar(car);
         contract.setCustomer(customer);
         contract.setPartner(partner);
-        contract.setStartDate(day + "/" + month + "/" + year);
+        contract.setStartDate(day + "." + month + "." + year);
         contract.setFinished(false);
         contract.setOrderedParts(false);
+        contract.setBranch(createContract.getBranch().toUpperCase());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         contract.setCreatedBy(authentication.getName());
 
@@ -99,7 +100,7 @@ public class ContractService {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        String dateString = day + "/" + month + "/" + "/" + year;
+        String dateString = day + "." + month + "." + + year;
 
         List<String> updatedDateList = contract.getUpdatedDate();
         updatedDateList.add(dateString);

@@ -1,11 +1,11 @@
 package com.andrei.fleetManagement.service;
 
-import com.andrei.fleetManagement.domain.Contract;
 import com.andrei.fleetManagement.domain.Customer;
 import com.andrei.fleetManagement.domain.User;
 import com.andrei.fleetManagement.exception.ResourceNotFoundExceptions;
 import com.andrei.fleetManagement.persistance.CustomerRepository;
 import com.andrei.fleetManagement.transfer.CreateCustomer;
+import org.apache.commons.lang3.text.WordUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -27,14 +27,16 @@ public class CustomerService {
     public Customer createCustomer(CreateCustomer createCustomer, User user) {
         LOGGER.info("Creating new customer");
         Customer customer = new Customer();
-        customer.setName(createCustomer.getName());
+        customer.setName(createCustomer.getName().toUpperCase());
         customer.setEmail(createCustomer.getEmail());
-        customer.setPassword(createCustomer.getPassword());
         customer.setPhoneNumber(createCustomer.getPhoneNumber());
-        customer.setCif(createCustomer.getCif());
-        customer.setBankAccount(createCustomer.getBankAccount());
-        customer.setAddress(createCustomer.getAddress());
-        customer.setContactPerson(createCustomer.getContactPerson());
+        customer.setCif(createCustomer.getCif().toUpperCase());
+        customer.setBankAccount(createCustomer.getBankAccount().toUpperCase());
+        customer.setAddress(createCustomer.getAddress().toUpperCase());
+
+        String name = createCustomer.getContactPerson();
+
+        customer.setContactPerson(WordUtils.capitalize(name));
         customer.setUser(user);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

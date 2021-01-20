@@ -6,6 +6,7 @@ import com.andrei.fleetManagement.exception.ResourceNotFoundExceptions;
 import com.andrei.fleetManagement.persistance.PartnerRepository;
 import com.andrei.fleetManagement.transfer.CreatePartner;
 import net.bytebuddy.agent.builder.AgentBuilder;
+import org.apache.commons.lang3.text.WordUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -28,14 +29,16 @@ public class PartnerService {
     public Partner createPartner(CreatePartner createPartner, User user) {
         LOGGER.info("Creating partner");
         Partner partner = new Partner();
-        partner.setName(createPartner.getName());
+        partner.setName(createPartner.getName().toUpperCase());
         partner.setEmail(createPartner.getEmail());
-        partner.setPassword(createPartner.getPassword());
         partner.setPhoneNumber(createPartner.getPhoneNumber());
-        partner.setCif(createPartner.getCif());
-        partner.setBankAccount(createPartner.getBankAccount());
-        partner.setAddress(createPartner.getAddress());
-        partner.setContactPerson(createPartner.getContactPerson());
+        partner.setCif(createPartner.getCif().toUpperCase());
+        partner.setBankAccount(createPartner.getBankAccount().toUpperCase());
+        partner.setAddress(createPartner.getAddress().toUpperCase());
+
+        String contactPerson = createPartner.getContactPerson();
+        partner.setContactPerson(WordUtils.capitalize(contactPerson));
+
         partner.setUser(user);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

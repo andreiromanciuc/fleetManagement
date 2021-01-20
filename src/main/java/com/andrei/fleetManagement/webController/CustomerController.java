@@ -9,6 +9,7 @@ import com.andrei.fleetManagement.service.UserService;
 import com.andrei.fleetManagement.transfer.CreateCar;
 import com.andrei.fleetManagement.transfer.CreateCustomer;
 import com.andrei.fleetManagement.transfer.CreateUser;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,8 +32,8 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
-    @PostMapping("/{customerId}")
-    public Car createCar(@PathVariable long customerId, @RequestBody CreateCar createCar) {
+    @PostMapping
+    public Car createCar(@RequestParam long customerId, @RequestBody CreateCar createCar) {
        return carService.createCar(customerId, createCar);
     }
 

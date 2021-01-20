@@ -20,12 +20,10 @@ public class CustomerController {
 
     private final CustomerService customerService;
     private final CarService carService;
-    private final UserService userService;
 
-    public CustomerController(CustomerService customerService, CarService carService, UserService userService) {
+    public CustomerController(CustomerService customerService, CarService carService) {
         this.customerService = customerService;
         this.carService = carService;
-        this.userService = userService;
     }
 
     @GetMapping
@@ -38,19 +36,6 @@ public class CustomerController {
        return carService.createCar(customerId, createCar);
     }
 
-    @PostMapping
-    public Customer createCustomer(@RequestBody CreateCustomer createCustomer) {
 
-        CreateUser createUser = new CreateUser();
-        createUser.setRole("CUSTOMER");
-        createUser.setPermission("");
-        createUser.setPassword(createCustomer.getPassword());
-        createUser.setEmail(createCustomer.getEmail());
-        createUser.setPhoneNumber(createCustomer.getPhoneNumber());
-        createUser.setUsername(createCustomer.getEmail());
-        User user = userService.createUser(createUser);
-
-        return customerService.createCustomer(createCustomer, user);
-    }
 
 }

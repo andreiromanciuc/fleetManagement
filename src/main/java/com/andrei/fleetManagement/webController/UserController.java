@@ -1,13 +1,17 @@
 package com.andrei.fleetManagement.webController;
 
 import com.andrei.fleetManagement.domain.Contract;
+import com.andrei.fleetManagement.domain.Customer;
+import com.andrei.fleetManagement.domain.Partner;
 import com.andrei.fleetManagement.domain.User;
 import com.andrei.fleetManagement.service.ContractService;
+import com.andrei.fleetManagement.service.CustomerService;
+import com.andrei.fleetManagement.service.PartnerService;
 import com.andrei.fleetManagement.service.UserService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.andrei.fleetManagement.transfer.CreateCustomer;
+import com.andrei.fleetManagement.transfer.CreatePartner;
+import com.andrei.fleetManagement.transfer.CreateUser;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -19,10 +23,14 @@ public class UserController {
 
     private final UserService userService;
     private final ContractService contractService;
+    private final CustomerService customerService;
+    private final PartnerService partnerService;
 
-    public UserController(UserService userService, ContractService contractService) {
+    public UserController(UserService userService, ContractService contractService, CustomerService customerService, PartnerService partnerService) {
         this.userService = userService;
         this.contractService = contractService;
+        this.customerService = customerService;
+        this.partnerService = partnerService;
     }
 
     @GetMapping
@@ -34,5 +42,35 @@ public class UserController {
     @GetMapping("/contracts")
     public List<Contract> getUnfinishedContracts() {
         return contractService.getUnfinishedContracts();
+    }
+
+    @PostMapping("/customer")
+    public Customer createCustomer(@RequestBody CreateCustomer createCustomer) {
+
+        CreateUser createUser = new CreateUser();
+        createUser.setRole("CUSTOMER");
+        createUser.setPermission("");
+        createUser.setPassword(createCustomer.getPassword());
+        createUser.setEmail(createCustomer.getEmail());
+        createUser.setPhoneNumber(createCustomer.getPhoneNumber());
+        createUser.setUsername(createCustomer.getEmail());
+        User user = userService.createUser(createUser);
+
+        return customerService.createCustomer(createCustomer, user);
+    }
+
+    @PostMapping("/partner")
+    public Partner createPartner(@RequestBody CreatePartner createPartner) {
+
+        CreateUser createUser = new CreateUser();
+        createUser.setRole("PARTNER");
+        createUser.setPermission("");
+        createUser.setPassword(createPartner.getPassword());
+        createUser.setEmail(createPartner.getEmail());
+        createUser.setPhoneNumber(createPartner.getPhoneNumber());
+        createUser.setUsername(createPartner.getEmail());
+        User user = userService.createUser(createUser);
+
+        return partnerService.createPartner(createPartner, user);
     }
 }

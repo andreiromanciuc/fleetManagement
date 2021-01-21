@@ -10,7 +10,7 @@
 </head>
 <body style="padding-top: 0">
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 0">
-    <a class="navbar-brand" href="http://localhost:8081/home">Inter Cars <br>Fleet Management</a>
+    <a class="navbar-brand" href="/home">Inter Cars <br>Fleet Management</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -18,10 +18,10 @@
                 <a class="nav-link" href="/user">IC - User <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8081/home/customer">Client</a>
+                <a class="nav-link" href="/customer">Client</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8081/home/partner">Partener</a>
+                <a class="nav-link" href="/partner">Partener</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" style="margin-right: 200px">
@@ -40,15 +40,15 @@
     </div>
 </nav>
 <div style="margin-left: 15px; margin-top: 10px" id="container">
-    <button type="button" class="btn btn-outline-warning" id="unfinished-contracts-btn">Unfinished Contracts</button>
-    <button type="button" class="btn btn-outline-success" id="new-contract-btn">New Contract</button>
-    <button type="button" class="btn btn-outline-info" id="new-customer-btn">Create Customer</button>
-    <button type="button" class="btn btn-outline-secondary" id="new-partner-btn">Create Partner</button>
+    <button type="button" class="btn btn-outline-warning" id="unfinished-contracts-btn">Contracte deschise</button>
+    <button type="button" class="btn btn-outline-success" id="new-contract-btn">Contract nou</button>
+    <button type="button" class="btn btn-outline-info" id="new-customer-btn">Creare Client</button>
+    <button type="button" class="btn btn-outline-secondary" id="new-partner-btn">Creare Partener</button>
+</div>
+<div id="display-requests">
 </div>
 
-<div id="table-display">
 
-</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="js/user.js"></script>

@@ -56,7 +56,10 @@ public class ContractService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         contract.setCreatedBy(authentication.getName());
 
-        return contractRepository.save(contract);
+        Contract newContract = contractRepository.save(contract);
+
+        LOGGER.info("Contract was created with id {}", newContract.getId());
+        return newContract;
     }
 
     public Contract addExchangePartToContract(long contractId, ExchangePart exchangePart) {
@@ -116,6 +119,33 @@ public class ContractService {
     public List<Contract> getUnfinishedContracts() {
         LOGGER.info("Retrieving all unfinished contracts");
         return contractRepository.findContractsByFinishedFalse();
+    }
+
+    public List<Contract> getUnfinishedContractsForCustomer(long customerId) {
+        LOGGER.info("Retrieving unfinished contracts for customer {}", customerId);
+        List<Contract> contractsByFinishedFalse = contractRepository.findContractsByFinishedFalse();
+
+        List<Contract> finalList = new ArrayList<>();
+        for (Contract contract : contractsByFinishedFalse) {
+            if (contract.getCustomer().getId() == customerId) {
+                finalList.add(contract);
+            }
+        }
+
+        return finalList;
+    }
+
+    public List<Contract> getUnfinishedContractsForPartner(long partnerId) {
+        LOGGER.info("Retrieving unfinished contracts for partner {}", partnerId);
+        List<Contract> contractsByFinishedFalse = contractRepository.findContractsByFinishedFalse();
+
+        List<Contract> finalList = new ArrayList<>();
+        for (Contract contract : contractsByFinishedFalse) {
+            if (contract.getPartner().getId() == partnerId) {
+                finalList.add(contract);
+            }
+        }
+        return finalList;
     }
 
     public Contract getContractById(long id) {

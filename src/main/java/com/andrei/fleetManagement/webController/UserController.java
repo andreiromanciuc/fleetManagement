@@ -76,7 +76,7 @@ public class UserController {
     }
 
     @PostMapping("/contract")
-    public Contract createContract(CreateContract createContract){
+    public Contract createContract(@RequestBody CreateContract createContract){
         return contractService.createContract(createContract);
     }
 }

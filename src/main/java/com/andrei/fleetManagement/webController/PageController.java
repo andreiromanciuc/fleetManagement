@@ -22,4 +22,14 @@ public class PageController {
     public String getUserView() {
         return "user";
     }
+
+    @GetMapping("customer")
+    public String getCustomerView() {
+        return "customer";
+    }
+
+    @GetMapping("partner")
+    public String getPartnerView() {
+        return "partner";
+    }
 }

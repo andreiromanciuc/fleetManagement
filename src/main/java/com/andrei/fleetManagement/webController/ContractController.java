@@ -35,11 +35,6 @@ public class ContractController {
         return workmanshipService.getWorkmanshipByContract(contract);
     }
 
-    @PostMapping
-    public Contract createContract(@RequestBody CreateContract createContract) {
-       return contractService.createContract(createContract);
-    }
-
     @PutMapping("/{contractId}")
     public Contract addExchangePartToContract(@PathVariable long contractId, @RequestBody ExchangePart exchangePart) {
         return contractService.addExchangePartToContract(contractId, exchangePart);

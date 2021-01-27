@@ -45,7 +45,8 @@ public class CarService {
 
     public Car getCarByPlateNumber(String plateNumber) {
         LOGGER.info("Retrieving car by plate number");
-        return carRepository.findByPlateNumber(plateNumber);
+        String newPlateNumber = plateNumber.replaceAll("\\s+", "");
+        return carRepository.findByPlateNumber(newPlateNumber);
     }
 
     public Car getCarByVin(String vinNumber) {

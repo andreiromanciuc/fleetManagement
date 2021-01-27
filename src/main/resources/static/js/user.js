@@ -68,7 +68,7 @@ window.User = {
     },
 
     displayContractForm: function () {
-        return `<form style="margin-top: 20px; padding-right: 20px; padding-left: 20px; width: 30%;">
+        return `<form>
         <div class="row mb-3">
             <label for="inputCar" class="col-sm-2 col-form-label">Masina</label>
             <div class="col-sm-10">
@@ -96,6 +96,34 @@ window.User = {
 
         <button type="submit" class="btn btn-primary" id="create-contract-btn">Creare contract</button>
     </form>`
+    },
+
+    searchCarForContract: function () {
+        let car = $("#inputCar").val();
+        $.ajax({
+            url: User.API_URL + "/car?plateNumber=" + car,
+            method: "GET"
+        }).done(function (response) {
+            $('#display-car').html(User.displayFoundCar(response));
+        })
+    },
+
+    displayFoundCar: function (car) {
+        return `id:${car.id}, ${car.plateNumber}, ${car.vinNumber}`
+    },
+
+    searchCustomerForContract: function () {
+        let customer = $("#inputCustomer").val();
+        $.ajax({
+            url: User.API_URL + "/customer?name=" + customer,
+            method: "GET"
+        }).done(function (response) {
+            $('#display-customer').html(User.displayFoundCustomer(response));
+        })
+    },
+
+    displayFoundCustomer: function (customer) {
+        return `id:${customer.id}, ${customer.name}`
     },
 
     displayCustomerForm: function () {
@@ -239,25 +267,53 @@ window.User = {
             event.preventDefault();
             $("#display-requests").html(User.displayTable());
             User.getUnfinishedContracts();
+
         });
 
         $("#new-contract-btn").click(function (event) {
             event.preventDefault();
             $("#display-requests").html(User.displayContractForm());
-            User.createNewContract();
+            document.getElementById("display-search-btn").style.visibility = 'visible';
+            document.getElementById("display-searched").style.visibility = 'visible';
+
+
+            // User.createNewContract();
         });
 
         $("#new-customer-btn").click(function (event) {
             event.preventDefault();
             $("#display-requests").html(User.displayCustomerForm());
+            document.getElementById("display-search-btn").style.visibility = 'visible';
+            document.getElementById("display-searched").style.visibility = 'visible';
 
         });
 
         $("#new-partner-btn").click(function (event) {
             event.preventDefault();
             $("#display-requests").html(User.displayPartnerForm());
+            document.getElementById("display-search-btn").style.visibility = 'visible';
+            document.getElementById("display-searched").style.visibility = 'visible';
 
         });
+
+        $("#search-car-btn").click(function (event) {
+            event.preventDefault();
+            User.searchCarForContract();
+        });
+
+        $("#search-customer-btn").click(function (event) {
+            event.preventDefault();
+            User.searchCustomerForContract();
+        });
+
+        $("#search-partner-btn").click(function (event) {
+            // event.preventDefault();
+            // User.searchCustomerForContract();
+            console.log("clicked");
+        });
+
+
+
     }
 };
 

@@ -1,13 +1,7 @@
 package com.andrei.fleetManagement.webController;
 
-import com.andrei.fleetManagement.domain.Contract;
-import com.andrei.fleetManagement.domain.Customer;
-import com.andrei.fleetManagement.domain.Partner;
-import com.andrei.fleetManagement.domain.User;
-import com.andrei.fleetManagement.service.ContractService;
-import com.andrei.fleetManagement.service.CustomerService;
-import com.andrei.fleetManagement.service.PartnerService;
-import com.andrei.fleetManagement.service.UserService;
+import com.andrei.fleetManagement.domain.*;
+import com.andrei.fleetManagement.service.*;
 import com.andrei.fleetManagement.transfer.CreateContract;
 import com.andrei.fleetManagement.transfer.CreateCustomer;
 import com.andrei.fleetManagement.transfer.CreatePartner;
@@ -26,18 +20,30 @@ public class UserController {
     private final ContractService contractService;
     private final CustomerService customerService;
     private final PartnerService partnerService;
+    private final CarService carService;
 
-    public UserController(UserService userService, ContractService contractService, CustomerService customerService, PartnerService partnerService) {
+    public UserController(UserService userService, ContractService contractService, CustomerService customerService, PartnerService partnerService, CarService carService) {
         this.userService = userService;
         this.contractService = contractService;
         this.customerService = customerService;
         this.partnerService = partnerService;
+        this.carService = carService;
     }
 
     @GetMapping
     public User getCurrentUser(Principal principal){
         String name = principal.getName();
         return userService.getUserByName(name);
+    }
+
+    @GetMapping("/car")
+    public Car getCarByPlateNumber(@RequestParam String plateNumber) {
+        return carService.getCarByPlateNumber(plateNumber);
+    }
+
+    @GetMapping("/customer")
+    public Customer getCustomer(@RequestParam String name) {
+        return customerService.getCustomerByName(name);
     }
 
     @GetMapping("/contracts")

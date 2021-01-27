@@ -62,7 +62,7 @@ public class CustomerService {
 
     public Customer getCustomerByName(String name) {
         LOGGER.info("Retrieving customer by name {}", name);
-        return customerRepository.findByName(name);
+        return customerRepository.findByName("SC " + name + " SRL");
     }
 
     public Customer getCustomerById(long id) {

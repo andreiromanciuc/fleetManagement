@@ -59,7 +59,7 @@ public class PartnerService {
 
     public Partner getPartnerByName(String name) {
         LOGGER.info("Retrieving partner {}", name);
-         return partnerRepository.findByName(name);
+         return partnerRepository.findByName("SC " + name + " SRL");
     }
 
     public Partner getPartnerById(long id) {

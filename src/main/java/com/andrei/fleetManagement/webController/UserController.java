@@ -46,6 +46,11 @@ public class UserController {
         return customerService.getCustomerByName(name);
     }
 
+    @GetMapping("/partner")
+    public Partner getPartner(@RequestParam String name) {
+        return partnerService.getPartnerByName(name);
+    }
+
     @GetMapping("/contracts")
     public List<Contract> getUnfinishedContracts() {
         return contractService.getUnfinishedContracts();

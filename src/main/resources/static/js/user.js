@@ -68,7 +68,7 @@ window.User = {
     },
 
     displayContractForm: function () {
-        return `<form>
+        return `
         <div class="row mb-3">
             <label for="inputCar" class="col-sm-2 col-form-label">Masina</label>
             <div class="col-sm-10">
@@ -92,10 +92,37 @@ window.User = {
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="inputBranch">
             </div>
-        </div>
+        </div>`
+    },
 
-        <button type="submit" class="btn btn-primary" id="create-contract-btn">Creare contract</button>
-    </form>`
+    createNewContract: function (carResponse, customerResponse, partnerResponse, branchResponse) {
+        let carId = localStorage.getItem("car");
+        localStorage.removeItem("car");
+
+        let customerId = localStorage.getItem("customer");
+        localStorage.removeItem("customer");
+
+        let partnerId = localStorage.getItem("partner");
+        localStorage.removeItem("partner");
+
+        let branch = $("#inputBranch").val();
+        let tbody ={
+            finished : false,
+            carId : carId,
+            customerId : customerId,
+            partnerId : partnerId,
+            branch: branch
+        };
+
+        $.ajax({
+            url: User.API_URL + "/contract",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(tbody)
+        }).done(function (response) {
+            console.log(response);
+            location.reload();
+        })
     },
 
     searchCarForContract: function () {
@@ -105,11 +132,12 @@ window.User = {
             method: "GET"
         }).done(function (response) {
             $('#display-car').html(User.displayFoundCar(response));
+            localStorage.setItem("car", response.id.toString());
         })
     },
 
     displayFoundCar: function (car) {
-        return `id:${car.id}, ${car.plateNumber}, ${car.vinNumber}`
+        return `id: ${car.id}, ${car.plateNumber}, ${car.vinNumber}`
     },
 
     searchCustomerForContract: function () {
@@ -119,15 +147,31 @@ window.User = {
             method: "GET"
         }).done(function (response) {
             $('#display-customer').html(User.displayFoundCustomer(response));
+            localStorage.setItem("customer", response.id.toString());
         })
     },
 
     displayFoundCustomer: function (customer) {
-        return `id:${customer.id}, ${customer.name}`
+        return `id: ${customer.id}, ${customer.name}`
+    },
+
+    searchPartnerForContract: function () {
+        let partner = $("#inputPartner").val();
+        $.ajax({
+            url: User.API_URL + "/partner?name=" + partner,
+            method: "GET"
+        }).done(function (response) {
+            $('#display-partner').html(User.displayFoundPartner(response));
+            localStorage.setItem("partner", response.id.toString());
+        })
+    },
+
+    displayFoundPartner: function (partner) {
+        return`id: ${partner.id}, ${partner.name}`
     },
 
     displayCustomerForm: function () {
-        return `<form style="margin-top: 20px; padding-right: 20px; padding-left: 20px; width: 30%;">
+        return `
         <div class="row mb-3">
             <label for="inputName" class="col-sm-2 col-form-label">Nume companie</label>
             <div class="col-sm-10">
@@ -175,10 +219,7 @@ window.User = {
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="inputContactPerson">
             </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary" id="create-customer-btn">Creare client</button>
-    </form>`
+        </div>`
     },
 
     displayPartnerForm: function () {
@@ -242,29 +283,10 @@ window.User = {
         $("#tbody").html(tableBody);
     },
 
-    //todo: to finish below method
-    createNewContract: function () {
-        let tbody ={
-            finished : false,
-            carId : $("#inputCar").val(),
-            customerId : $("#inputCustomer").val(),
-            partnerId : $("#inputPartner").val(),
-            branch : "R59"
-        };
-
-        $.ajax({
-            url: User.API_URL + "/contract",
-            method: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(tbody)
-        }).done(function (response) {
-            console.log(response);
-        })
-    },
-
     bindEvents: function () {
         $("#unfinished-contracts-btn").click(function (event) {
             event.preventDefault();
+            document.getElementById("create-btn-div").style.visibility = 'hidden';
             $("#display-requests").html(User.displayTable());
             User.getUnfinishedContracts();
 
@@ -275,9 +297,7 @@ window.User = {
             $("#display-requests").html(User.displayContractForm());
             document.getElementById("display-search-btn").style.visibility = 'visible';
             document.getElementById("display-searched").style.visibility = 'visible';
-
-
-            // User.createNewContract();
+            document.getElementById("create-btn-div").style.visibility = 'visible';
         });
 
         $("#new-customer-btn").click(function (event) {
@@ -285,7 +305,7 @@ window.User = {
             $("#display-requests").html(User.displayCustomerForm());
             document.getElementById("display-search-btn").style.visibility = 'visible';
             document.getElementById("display-searched").style.visibility = 'visible';
-
+            document.getElementById("create-btn-div").style.visibility = 'visible';
         });
 
         $("#new-partner-btn").click(function (event) {
@@ -293,7 +313,7 @@ window.User = {
             $("#display-requests").html(User.displayPartnerForm());
             document.getElementById("display-search-btn").style.visibility = 'visible';
             document.getElementById("display-searched").style.visibility = 'visible';
-
+            document.getElementById("create-btn-div").style.visibility = 'visible';
         });
 
         $("#search-car-btn").click(function (event) {
@@ -307,12 +327,14 @@ window.User = {
         });
 
         $("#search-partner-btn").click(function (event) {
-            // event.preventDefault();
-            // User.searchCustomerForContract();
-            console.log("clicked");
+            event.preventDefault();
+            User.searchPartnerForContract();
         });
 
-
+        $("#create-btn").click(function (event) {
+            event.preventDefault();
+            User.createNewContract();
+        });
 
     }
 };

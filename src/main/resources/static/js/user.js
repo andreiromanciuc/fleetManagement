@@ -120,7 +120,6 @@ window.User = {
             contentType: "application/json",
             data: JSON.stringify(tbody)
         }).done(function (response) {
-            console.log(response);
             location.reload();
         })
     },
@@ -220,6 +219,36 @@ window.User = {
                 <input type="text" class="form-control" id="inputContactPerson">
             </div>
         </div>`
+    },
+
+    createCustomer: function () {
+        let customerName = $("#inputName").val();
+        let customerEmail = $("#inputEmail").val();
+        let customerPassword = $("#inputPassword").val();
+        let customerPhone = $("#inputPhone").val();
+        let customerCif = $("#inputCif").val();
+        let customerBankAccount = $("#inputBankAccount").val();
+        let customerAddress = $("#inputAddress").val();
+        let customerContactPerson = $("#inputContactPerson").val();
+        let tbody = {
+            name : customerName,
+            email : customerEmail,
+            password : customerPassword,
+            phoneNumber : customerPhone,
+            cif : customerCif,
+            bankAccount : customerBankAccount,
+            address : customerAddress,
+            contactPerson : customerContactPerson
+        };
+
+        $.ajax({
+            url: User.API_URL + "/customer",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(tbody)
+        }).done(function (response) {
+            location.reload();
+        })
     },
 
     displayPartnerForm: function () {
@@ -334,6 +363,7 @@ window.User = {
         $("#create-btn").click(function (event) {
             event.preventDefault();
             User.createNewContract();
+            User.createCustomer();
         });
 
     }

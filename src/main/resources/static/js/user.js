@@ -221,9 +221,9 @@ window.User = {
         </div>
         <p>Va rugam selectati tipul user-ului:</p>
             <input type="radio" id="customer-radio" name="user-type" value="customer-radio">
-            <label for="customer-radio">Customer</label><br>
+            <label for="customer-radio">Client</label><br>
             <input type="radio" id="partner-radio" name="user-type" value="partner-radio">
-            <label for="partner-radio">Partner</label><br>`
+            <label for="partner-radio">Partener</label><br>`
     },
 
     createCustomer: function () {
@@ -279,9 +279,10 @@ window.User = {
         $("#unfinished-contracts-btn").click(function (event) {
             event.preventDefault();
             document.getElementById("create-btn-div").style.visibility = 'hidden';
+            document.getElementById("display-search-btn").style.visibility = 'hidden';
+            document.getElementById("display-searched").style.visibility = 'hidden';
             $("#display-requests").html(User.displayTable());
             User.getUnfinishedContracts();
-
         });
 
         $("#new-contract-btn").click(function (event) {
@@ -295,9 +296,9 @@ window.User = {
         $("#new-customer-btn").click(function (event) {
             event.preventDefault();
             $("#display-requests").html(User.displayCustomerForm());
-            document.getElementById("display-search-btn").style.visibility = 'visible';
-            document.getElementById("display-searched").style.visibility = 'visible';
             document.getElementById("create-btn-div").style.visibility = 'visible';
+            document.getElementById("display-search-btn").style.visibility = 'hidden';
+            document.getElementById("display-searched").style.visibility = 'hidden';
         });
 
         $("#search-car-btn").click(function (event) {

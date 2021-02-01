@@ -30,9 +30,7 @@
         </form>
 
         <div class="personal-data" style="margin-right: 10px; opacity: 50%; size: 50px; padding: 5px">
-            logged in as:
-            Andrei Romanciuc
-            id: 1
+
         </div>
         <form method="get" action="/logout">
             <button type="submit" class="btn btn-danger">Logout</button>
@@ -42,27 +40,28 @@
 <div style="margin-left: 15px; margin-top: 10px" id="container">
     <button type="button" class="btn btn-outline-warning" id="unfinished-contracts-btn">Contracte deschise</button>
     <button type="button" class="btn btn-outline-success" id="new-contract-btn">Contract nou</button>
-    <button type="button" class="btn btn-outline-info" id="new-customer-btn">Creare Client/Partner</button>
+    <button type="button" class="btn btn-outline-info" id="new-customer-btn">Creare Client/Partener</button>
 </div>
-<div style="display: grid; grid-template-columns: auto auto auto; grid-column-gap: 10px; background-color: green">
-    <div id="display-requests" style="grid-column-start: 1; grid-column-end: 2; margin-top: 10px; margin-left: 20px;
-     background-color: dodgerblue">
+<div style="display: grid; grid-template-columns: auto auto auto; grid-column-gap: 10px">
+    <div id="display-requests" style="grid-column-start: 1; grid-column-end: 2; margin-top: 10px; margin-left: 20px">
     </div>
-    <div id="display-search-btn" style="grid-column-start: 2; grid-column-end: 3; margin-top: 10px; background-color: red;
+    <div id="display-search-btn" style="grid-column-start: 2; grid-column-end: 3; margin-top: 10px;
     visibility: hidden">
         <div id="display-search-car-btn" style="grid-column-start: 2; grid-column-end: 3; grid-row-start: 1; grid-row-end: 2;
         width: 50px; height: 60px;">
             <button id="search-car-btn"><i class="fas fa-search"></i></button>
         </div>
-        <div id="display-search-customer-btn" style="grid-column-start: 2; grid-column-end: 3; grid-row-start: 2; grid-row-end: 3">
+        <div id="display-search-customer-btn" style="grid-column-start: 2; grid-column-end: 3; grid-row-start: 2; grid-row-end: 3;
+        width: 50px; height: 60px;">
             <button id="search-customer-btn"><i class="fas fa-search"></i></button>
         </div>
-        <div id="display-search-partner-btn" style="grid-column-start: 2; grid-column-end: 3; grid-row-start: 3; grid-row-end: 4">
+        <div id="display-search-partner-btn" style="grid-column-start: 2; grid-column-end: 3; grid-row-start: 3; grid-row-end: 4;
+        width: 50px; height: 60px;">
             <button id="search-partner-btn"><i class="fas fa-search"></i></button>
         </div>
     </div>
     <div id="display-searched" style="grid-column-start: 3; grid-column-end: 4; margin-top: 10px; margin-right: 20px;
-    background-color: blue; visibility: hidden">
+    visibility: hidden">
         <div id="car-info" style="grid-column-start:3; grid-column-end: 4; grid-row-start: 1; grid-row-end: 2">
             <div id="display-car" >
 
@@ -81,7 +80,7 @@
 
     </div>
 </div>
-<div id="create-btn-div" style="visibility: hidden">
+<div id="create-btn-div" style="visibility: hidden; margin-left: 20px">
     <button type="submit" class="btn btn-primary" id="create-btn">Creare</button>
 </div>
 

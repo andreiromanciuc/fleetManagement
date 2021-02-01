@@ -218,10 +218,17 @@ window.User = {
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="inputContactPerson">
             </div>
-        </div>`
+        </div>
+        <p>Va rugam selectati tipul user-ului:</p>
+            <input type="radio" id="customer-radio" name="user-type" value="customer-radio">
+            <label for="customer-radio">Customer</label><br>
+            <input type="radio" id="partner-radio" name="user-type" value="partner-radio">
+            <label for="partner-radio">Partner</label><br>`
     },
 
     createCustomer: function () {
+        let radioButton =  $('input[name="user-type"]:checked').val();
+
         let customerName = $("#inputName").val();
         let customerEmail = $("#inputEmail").val();
         let customerPassword = $("#inputPassword").val();
@@ -241,69 +248,25 @@ window.User = {
             contactPerson : customerContactPerson
         };
 
-        $.ajax({
-            url: User.API_URL + "/customer",
-            method: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(tbody)
-        }).done(function (response) {
-            location.reload();
-        })
-    },
-
-    displayPartnerForm: function () {
-        return `<form style="margin-top: 20px; padding-right: 20px; padding-left: 20px; width: 30%;">
-        <div class="row mb-3">
-            <label for="inputName" class="col-sm-2 col-form-label">Nume companie</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputName">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="inputEmail" class="col-sm-2 col-form-label">Email companie</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Parola noua</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputPassword">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="inputPhone" class="col-sm-2 col-form-label">Nr. Telefon</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputPhone">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="inputCif" class="col-sm-2 col-form-label">CIF</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputCif">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="inputBankAccount" class="col-sm-2 col-form-label">Cont bancar</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputBankAccount">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="inputAddress" class="col-sm-2 col-form-label">Adresa</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputAddress">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="inputContactPerson" class="col-sm-2 col-form-label">Persoana de contact</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputContactPerson">
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary" id="create-customer-btn">Creare partener</button>
-    </form>`
+        if (radioButton === "customer-radio") {
+            $.ajax({
+                url: User.API_URL + "/customer",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(tbody)
+            }).done(function (response) {
+                location.reload();
+            })
+        } else if (radioButton === "partner-radio") {
+            $.ajax({
+                url: User.API_URL + "/partner",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(tbody)
+            }).done(function (response) {
+                location.reload();
+            })
+        }
     },
 
     displayUnfinishedContracts: function (contracts) {
@@ -332,14 +295,6 @@ window.User = {
         $("#new-customer-btn").click(function (event) {
             event.preventDefault();
             $("#display-requests").html(User.displayCustomerForm());
-            document.getElementById("display-search-btn").style.visibility = 'visible';
-            document.getElementById("display-searched").style.visibility = 'visible';
-            document.getElementById("create-btn-div").style.visibility = 'visible';
-        });
-
-        $("#new-partner-btn").click(function (event) {
-            event.preventDefault();
-            $("#display-requests").html(User.displayPartnerForm());
             document.getElementById("display-search-btn").style.visibility = 'visible';
             document.getElementById("display-searched").style.visibility = 'visible';
             document.getElementById("create-btn-div").style.visibility = 'visible';

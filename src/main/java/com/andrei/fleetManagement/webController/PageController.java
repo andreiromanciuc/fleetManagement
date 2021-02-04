@@ -32,4 +32,9 @@ public class PageController {
     public String getPartnerView() {
         return "partner";
     }
+
+    @GetMapping("contract")
+    public String getContractView(){
+        return "contract";
+    };
 }

@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface ContractRepository extends JpaRepository<Contract, Long> {
 
-    Contract findById (long id);
-
     List<Contract> findContractsByFinishedFalse();
 
 

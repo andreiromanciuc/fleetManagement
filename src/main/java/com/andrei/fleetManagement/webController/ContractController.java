@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("**/contract")
+@RequestMapping("home/user/contract")
 public class ContractController {
 
     private final ContractService contractService;
@@ -24,20 +24,25 @@ public class ContractController {
         this.workmanshipService = workmanshipService;
     }
 
-    @GetMapping
-    public Contract getContract(@RequestParam long contractId) {
-        return contractService.getContractById(contractId);
+    @PostMapping
+    public Contract createContract(@RequestBody CreateContract createContract){
+        return contractService.createContract(createContract);
     }
 
     @GetMapping("/{contractId}")
-    public List<Workmanship> getWorkmanshipByContract(@PathVariable long contractId) {
-        Contract contract = contractService.getContractById(contractId);
-        return workmanshipService.getWorkmanshipByContract(contract);
+    public Contract getContract(@PathVariable long contractId) {
+        return contractService.getContractById(contractId);
     }
 
-    @PutMapping("/{contractId}")
-    public Contract addExchangePartToContract(@PathVariable long contractId, @RequestBody ExchangePart exchangePart) {
-        return contractService.addExchangePartToContract(contractId, exchangePart);
-    }
+//    @GetMapping("/{contractId}")
+//    public List<Workmanship> getWorkmanshipByContract(@PathVariable long contractId) {
+//        Contract contract = contractService.getContractById(contractId);
+//        return workmanshipService.getWorkmanshipByContract(contract);
+//    }
+//
+//    @PutMapping("/{contractId}")
+//    public Contract addExchangePartToContract(@PathVariable long contractId, @RequestBody ExchangePart exchangePart) {
+//        return contractService.addExchangePartToContract(contractId, exchangePart);
+//    }
 
 }

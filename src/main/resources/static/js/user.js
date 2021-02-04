@@ -64,7 +64,48 @@ window.User = {
             <td>${contract.branch}</td>
             <td>${contract.partner.name}</td>
             <td>${contract.finished}</td>
+            <td><button id="edit-contract" onclick="User.getContractById(${contract.id});
+                        document.getElementById('create-btn-div').style.visibility = 'hidden';
+                        document.getElementById('display-search-btn').style.visibility = 'hidden';
+                        document.getElementById('display-searched').style.visibility = 'hidden';" 
+                style="border: none"><i class="fas fa-edit"></i></button></td>
         </tr>`
+    },
+
+    // todo: to finish below function
+    // - to sum workmanship prices
+    // - to sum pieces prices
+    // - to display them into table
+    getContractById: function (id) {
+        $.ajax({
+            url: User.API_URL+"/contract/" + id,
+            method: "GET"
+        }).done(function (response) {
+            // console.log(response);
+            $("#display-requests").html(User.displayDataOfContract(response));
+            let manopera = response.workmanshipList;
+            let sumManopera = 0;
+            for (let i = 0; i < manopera.length; i++) {
+
+            }
+        })
+    },
+
+    displayDataOfContract: function (contract) {
+        return `<table class="table table-bordered table-dark">
+        <thead>
+        <tr>
+            <th scope="col">${contract.id}</th>
+            <th scope="col">${contract.car.plateNumber}</th>
+            <th scope="col">${contract.customer.name}</th>
+            <th scope="col">${contract.partner.name}</th>
+            <th scope="col">Creat in data: ${contract.startDate}</th>
+            <th scope="col">Status piese: ${contract.orderedParts}</th>
+            <th scope="col">Incheiat: ${contract.finishDate}</th>
+            <th scope="col"><button style="border: none"><i class="fas fa-file-pdf"></i></button></th>
+        </tr>
+        </thead>
+    </table>`
     },
 
     displayContractForm: function () {
@@ -281,6 +322,7 @@ window.User = {
             document.getElementById("create-btn-div").style.visibility = 'hidden';
             document.getElementById("display-search-btn").style.visibility = 'hidden';
             document.getElementById("display-searched").style.visibility = 'hidden';
+            document.getElementById("contract-table").style.visibility = 'hidden';
             $("#display-requests").html(User.displayTable());
             User.getUnfinishedContracts();
         });
@@ -291,6 +333,8 @@ window.User = {
             document.getElementById("display-search-btn").style.visibility = 'visible';
             document.getElementById("display-searched").style.visibility = 'visible';
             document.getElementById("create-btn-div").style.visibility = 'visible';
+            document.getElementById("contract-table").style.visibility = 'hidden';
+
         });
 
         $("#new-customer-btn").click(function (event) {
@@ -299,6 +343,8 @@ window.User = {
             document.getElementById("create-btn-div").style.visibility = 'visible';
             document.getElementById("display-search-btn").style.visibility = 'hidden';
             document.getElementById("display-searched").style.visibility = 'hidden';
+            document.getElementById("contract-table").style.visibility = 'hidden';
+
         });
 
         $("#search-car-btn").click(function (event) {

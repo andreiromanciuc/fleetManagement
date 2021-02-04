@@ -86,8 +86,5 @@ public class UserController {
         return partnerService.createPartner(createPartner, user);
     }
 
-    @PostMapping("/contract")
-    public Contract createContract(@RequestBody CreateContract createContract){
-        return contractService.createContract(createContract);
-    }
+
 }

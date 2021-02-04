@@ -1,6 +1,7 @@
 package com.andrei.fleetManagement.service;
 
 import com.andrei.fleetManagement.domain.*;
+import com.andrei.fleetManagement.exception.ResourceNotFoundExceptions;
 import com.andrei.fleetManagement.persistance.ContractRepository;
 import com.andrei.fleetManagement.transfer.CreateContract;
 import org.slf4j.Logger;
@@ -64,7 +65,7 @@ public class ContractService {
 
     public Contract addExchangePartToContract(long contractId, ExchangePart exchangePart) {
         LOGGER.info("Adding exchange part to contract {}", contractId);
-        Contract contract = contractRepository.findById(contractId);
+        Contract contract = getContractById(contractId);
         List<ExchangePart> exchangePartList = contract.getExchangePartList();
         exchangePartList.add(exchangePart);
 
@@ -73,7 +74,7 @@ public class ContractService {
 
     public Contract addWorkmanshipToContract(long contractId, Workmanship workmanship) {
         LOGGER.info("Adding workmanship to contract {}", contractId);
-        Contract contract = contractRepository.findById(contractId);
+        Contract contract = getContractById(contractId);
         List<Workmanship> workmanshipList = contract.getWorkmanshipList();
         workmanshipList.add(workmanship);
 
@@ -81,7 +82,7 @@ public class ContractService {
     }
     public Contract updateCarOfTheContract(long contractId, long carId) {
         LOGGER.info("Updating contract by id {}", contractId);
-        Contract contract = contractRepository.findById(contractId);
+        Contract contract = getContractById(contractId);
         Car car = carService.getCarById(carId);
         contract.setCar(car);
 
@@ -95,7 +96,7 @@ public class ContractService {
 
     public Contract updateContract(long contractId) {
         LOGGER.info("Updating contract by id {}", contractId);
-        Contract contract = contractRepository.findById(contractId);
+        Contract contract = getContractById(contractId);
 
         Date date = new Date();
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Bucharest"));
@@ -150,7 +151,8 @@ public class ContractService {
 
     public Contract getContractById(long id) {
         LOGGER.info("Retrieving contract {}", id);
-        return contractRepository.findById(id);
+        return contractRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundExceptions("This contract " + id + " does not exist"));
     }
 
     public Contract setFixingAppointmentDate(long contractId, String date) {

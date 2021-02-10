@@ -7,6 +7,8 @@ import com.andrei.fleetManagement.persistance.WorkmanshipRepository;
 import com.andrei.fleetManagement.transfer.CreateWorkmanship;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,16 +28,19 @@ public class WorkmanshipService {
         this.partnerService = partnerService;
     }
 
-    public Workmanship createWorkmanship(long partnerId,
+    public Workmanship createWorkmanship(long contractId,
                                          CreateWorkmanship createWorkmanship) {
         LOGGER.info("Creating new workmanship");
 
         Workmanship workmanship = new Workmanship();
-        workmanship.setCode(createWorkmanship.getCode());
         workmanship.setName(createWorkmanship.getName());
         workmanship.setTiming(createWorkmanship.getTiming());
         workmanship.setPrice(createWorkmanship.getPrice());
-        workmanship.setPartner(partnerService.getPartnerById(partnerId));
+        workmanship.setCarModel(createWorkmanship.getCarModel());
+        workmanship.setCarType(createWorkmanship.getCarType());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        workmanship.setCreatedBy(authentication.getName());
 
         return workmanshipRepository.save(workmanship);
     }
@@ -44,17 +49,11 @@ public class WorkmanshipService {
         LOGGER.info("Updating workmanship with id {}", id);
         Workmanship workmanship = workmanshipRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundExceptions("This workmanship was not found"));
-        workmanship.setCode(createWorkmanship.getCode());
         workmanship.setName(createWorkmanship.getName());
         workmanship.setTiming(createWorkmanship.getTiming());
         workmanship.setPrice(createWorkmanship.getPrice());
 
         return workmanshipRepository.save(workmanship);
-    }
-
-    public List<Workmanship> getWorkmanshipByContract(Contract contract) {
-        LOGGER.info("Retrieving workmanship by contract");
-        return workmanshipRepository.findByContract(contract);
     }
 
     public Workmanship getWorkmanship(long id) {

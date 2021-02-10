@@ -2,20 +2,12 @@ package com.andrei.fleetManagement.transfer;
 
 public class CreateWorkmanship {
 
-    private String code;
     private String name;
     private double timing;
     private double price;
     private String carModel;
     private String carType;
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 
     public String getName() {
         return name;

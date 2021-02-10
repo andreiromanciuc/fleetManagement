@@ -10,5 +10,4 @@ public interface WorkmanshipRepository extends JpaRepository<Workmanship, Long> 
 
     Workmanship findByName(String name);
 
-    List<Workmanship> findByContract(Contract contract);
 }

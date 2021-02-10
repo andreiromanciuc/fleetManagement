@@ -51,10 +51,7 @@ public class UserController {
         return partnerService.getPartnerByName(name);
     }
 
-    @GetMapping("/contracts")
-    public List<Contract> getUnfinishedContracts() {
-        return contractService.getUnfinishedContracts();
-    }
+
 
     @PostMapping("/customer")
     public Customer createCustomer(@RequestBody CreateCustomer createCustomer) {

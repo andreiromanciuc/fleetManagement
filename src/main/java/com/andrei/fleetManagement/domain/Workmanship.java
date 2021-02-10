@@ -9,7 +9,6 @@ public class Workmanship {
     @Id
     @GeneratedValue
     private long id;
-    private String code;
     private String name;
     private double timing;
     private double price;
@@ -20,11 +19,6 @@ public class Workmanship {
     @ElementCollection
     private List<String> updatedBy;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Contract contract;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Partner partner;
 
     public long getId() {
         return id;
@@ -32,14 +26,6 @@ public class Workmanship {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getName() {
@@ -98,19 +84,4 @@ public class Workmanship {
         this.carType = carType;
     }
 
-    public Contract getContract() {
-        return contract;
-    }
-
-    public void setContract(Contract contract) {
-        this.contract = contract;
-    }
-
-    public Partner getPartner() {
-        return partner;
-    }
-
-    public void setPartner(Partner partner) {
-        this.partner = partner;
-    }
 }

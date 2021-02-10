@@ -17,15 +17,6 @@ window.User = {
             ${user.id}`
     },
 
-    getUnfinishedContracts: function () {
-        $.ajax({
-            url: User.API_URL + "/contracts",
-            method: "GET"
-        }).done(function (response) {
-            User.displayUnfinishedContracts(response);
-        })
-    },
-
     displayTable: function () {
         return`
             <table class="table" style="margin-top: 10px">
@@ -50,32 +41,6 @@ window.User = {
 </table>`
     },
 
-    getContractRow: function (contract) {
-        return `
-        <tr>
-            <th scope="row">${contract.id}</th>
-            <td>${contract.createdBy}</td>
-            <td>${contract.startDate}</td>
-            <td>${contract.customer.name}</td>
-            <td>${contract.car.plateNumber}</td>
-            <td>${contract.car.vinNumber}</td>
-            <td>${contract.startFixCarDate}</td>
-            <td>${contract.orderedParts}</td>
-            <td>${contract.branch}</td>
-            <td>${contract.partner.name}</td>
-            <td>${contract.finished}</td>
-            <td><button id="edit-contract" onclick="User.getContractById(${contract.id});
-                        document.getElementById('create-btn-div').style.visibility = 'hidden';
-                        document.getElementById('display-search-btn').style.visibility = 'hidden';
-                        document.getElementById('display-searched').style.visibility = 'hidden';" 
-                style="border: none"><i class="fas fa-edit"></i></button></td>
-        </tr>`
-    },
-
-    // todo: to finish below function
-    // - to sum workmanship prices
-    // - to sum pieces prices
-    // - to display them into table
     getContractById: function (id) {
         $.ajax({
             url: User.API_URL+"/contract/" + id,
@@ -101,10 +66,29 @@ window.User = {
             <th scope="col">${contract.partner.name}</th>
             <th scope="col">Creat in data: ${contract.startDate}</th>
             <th scope="col">Status piese: ${contract.orderedParts}</th>
-            <th scope="col">Incheiat: ${contract.finishDate}</th>
+            <th scope="col">Facturat: ${contract.finishDate}</th>
             <th scope="col"><button style="border: none"><i class="fas fa-file-pdf"></i></button></th>
         </tr>
         </thead>
+        <tbody>
+            <tr>
+                <td>
+                <label for="workmanship-name"></label>
+                <input type="text" id="workmanship-name" name="workmanship-name" placeholder="Introduceti denumirea manoperei">
+                </td>
+                <td>
+                <label for="workmanship-timing"></label>
+                <input type="text" id="workmanship-timing" name="workmanship-timing" placeholder="Introduceti timpii pentru manopera">
+                </td>
+                <td>
+                <label for="workmanship-price"></label>
+                <input type="text" id="workmanship-price" name="workmanship-price" placeholder="Introduceti costul orei de manopera"></td>
+                <td id="total-cost"></td>
+                <td id="vat">19%</td>
+                <td id="total-cost-with-vat"></td>
+                <td><button style="border: none"><i class="fas fa-edit"></i></button></td>
+                <td><button style="border: none"><i class="fas fa-trash-alt"></i></button></td>
+            </tr>
     </table>`
     },
 
@@ -310,21 +294,15 @@ window.User = {
         }
     },
 
-    displayUnfinishedContracts: function (contracts) {
-        let tableBody = '';
-        contracts.forEach(contract => tableBody += User.getContractRow(contract));
-        $("#tbody").html(tableBody);
-    },
-
     bindEvents: function () {
         $("#unfinished-contracts-btn").click(function (event) {
             event.preventDefault();
-            document.getElementById("create-btn-div").style.visibility = 'hidden';
-            document.getElementById("display-search-btn").style.visibility = 'hidden';
-            document.getElementById("display-searched").style.visibility = 'hidden';
-            document.getElementById("contract-table").style.visibility = 'hidden';
-            $("#display-requests").html(User.displayTable());
-            User.getUnfinishedContracts();
+            // document.getElementById("create-btn-div").style.visibility = 'hidden';
+            // document.getElementById("display-search-btn").style.visibility = 'hidden';
+            // document.getElementById("display-searched").style.visibility = 'hidden';
+            // document.getElementById("contract-table").style.visibility = 'hidden';
+            // $("#display-requests").html(User.displayTable());
+            window.location = "/contract";
         });
 
         $("#new-contract-btn").click(function (event) {

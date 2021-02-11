@@ -7,8 +7,8 @@ window.Contract = {
             url: Contract.API_URL + "/contracts",
             method: "GET"
         }).done(function (response) {
-            // Contract.displayUnfinishedContracts(response);
-            console.log(response);
+            $("#display-requests").html(Contract.displayTable());
+            Contract.displayUnfinishedContracts(response);
         })
     },
 
@@ -33,13 +33,33 @@ window.Contract = {
             <td>${contract.partner.name}</td>
             <td>${contract.finished}</td>
             <td><button id="edit-contract" onclick="
-                        window.location = '/contract';
-                        User.getContractById(${contract.id});
-                        document.getElementById('create-btn-div').style.visibility = 'hidden';
-                        document.getElementById('display-search-btn').style.visibility = 'hidden';
-                        document.getElementById('display-searched').style.visibility = 'hidden';" 
-                style="border: none"><i class="fas fa-edit"></i></button></td>
+                        User.getContractById(${contract.id})">
+                        <i class="fas fa-edit"></i></button></td>
         </tr>`
+    },
+
+    displayTable: function () {
+        return`
+            <table class="table" style="margin-top: 10px">
+    <thead>
+         <tr>
+            <th>ID</th>
+            <th>Creat de:</th>
+            <th>Creat in data de:</th>
+            <th>Client</th>
+            <th>Nr. masina</th>
+            <th>VIN masina</th>
+            <th>Data programarii</th>
+            <th>Status comanda piese</th>
+            <th>Comandate in filiala</th>
+            <th>Partener</th>
+            <th>Status contract</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+
+    </tbody>
+</table>`
     },
 
 

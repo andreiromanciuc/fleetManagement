@@ -17,29 +17,7 @@ window.User = {
             ${user.id}`
     },
 
-    displayTable: function () {
-        return`
-            <table class="table" style="margin-top: 10px">
-    <thead>
-         <tr>
-            <th>ID</th>
-            <th>Creat de:</th>
-            <th>Creat in data de:</th>
-            <th>Client</th>
-            <th>Nr. masina</th>
-            <th>VIN masina</th>
-            <th>Data programarii</th>
-            <th>Status comanda piese</th>
-            <th>Comandate in filiala</th>
-            <th>Partener</th>
-            <th>Status contract</th>
-        </tr>
-    </thead>
-    <tbody id="tbody">
 
-    </tbody>
-</table>`
-    },
 
     getContractById: function (id) {
         $.ajax({
@@ -297,11 +275,7 @@ window.User = {
     bindEvents: function () {
         $("#unfinished-contracts-btn").click(function (event) {
             event.preventDefault();
-            // document.getElementById("create-btn-div").style.visibility = 'hidden';
-            // document.getElementById("display-search-btn").style.visibility = 'hidden';
-            // document.getElementById("display-searched").style.visibility = 'hidden';
-            // document.getElementById("contract-table").style.visibility = 'hidden';
-            // $("#display-requests").html(User.displayTable());
+
             window.location = "/contract";
         });
 

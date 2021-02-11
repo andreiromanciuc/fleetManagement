@@ -42,161 +42,16 @@
     <button type="button" class="btn btn-outline-success" id="new-contract-btn">Contract nou</button>
     <button type="button" class="btn btn-outline-info" id="new-customer-btn">Creare Client/Partener</button>
 </div>
-<div style="display: grid; grid-template-columns: auto auto auto; grid-column-gap: 10px">
-    <div id="display-requests" style="grid-column-start: 1; grid-column-end: 2; margin-top: 10px; margin-left: 20px">
-    </div>
-    <div id="display-search-btn" style="grid-column-start: 2; grid-column-end: 3; margin-top: 10px;
-    visibility: hidden">
-        <div id="display-search-car-btn" style="grid-column-start: 2; grid-column-end: 3; grid-row-start: 1; grid-row-end: 2;
-        width: 50px; height: 60px;">
-            <button id="search-car-btn"><i class="fas fa-search"></i></button>
-        </div>
-        <div id="display-search-customer-btn" style="grid-column-start: 2; grid-column-end: 3; grid-row-start: 2; grid-row-end: 3;
-        width: 50px; height: 60px;">
-            <button id="search-customer-btn"><i class="fas fa-search"></i></button>
-        </div>
-        <div id="display-search-partner-btn" style="grid-column-start: 2; grid-column-end: 3; grid-row-start: 3; grid-row-end: 4;
-        width: 50px; height: 60px;">
-            <button id="search-partner-btn"><i class="fas fa-search"></i></button>
-        </div>
-    </div>
-    <div id="display-searched" style="grid-column-start: 3; grid-column-end: 4; margin-top: 10px; margin-right: 20px;
-    visibility: hidden">
-        <div id="car-info" style="grid-column-start:3; grid-column-end: 4; grid-row-start: 1; grid-row-end: 2">
-            <div id="display-car" >
 
-            </div>
-        </div>
-        <div id="display-customer-id">
-
-        </div><div id="display-customer" style="grid-column-start: 3; grid-column-end: 4; grid-row-start: 2; grid-row-end: 3">
-
-    </div>
-        <div id="display-partner-id">
-
-        </div><div id="display-partner" style="grid-column-start: 3; grid-column-end: 4; grid-row-start: 3; grid-row-end: 4">
-
-    </div>
-
-    </div>
-</div>
-<div id="create-btn-div" style="visibility: hidden; margin-left: 20px">
-    <button type="submit" class="btn btn-primary" id="create-btn">Creare</button>
+<div id="display-requests">
 </div>
 
-<div id="contract-table" style="visibility: hidden">
 
-    <table class="table table-bordered table-dark">
-        <thead>
-        <tr>
-            <th scope="col">Manopera</th>
-            <th scope="col">Timpi</th>
-            <th scope="col">Pret unitar</th>
-            <th scope="col">Valoare neta manopera</th>
-            <th scope="col">TVA</th>
-            <th scope="col">Valoare bruta manopera</th>
-            <th scope="col">Editare</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>D/R Discuri frana fata</td>
-            <td>1.2</td>
-            <td>75</td>
-            <td>90</td>
-            <td>19%</td>
-            <td>107.01</td>
-            <td><button style="border: none"><i class="fas fa-edit"></i></button></td>
-            <td><button style="border: none"><i class="fas fa-trash-alt"></i></button></td>
-        </tr>
-        <tr>
-            <td><label for="new-work"></label><input type="text" id="new-work" name="new-work" placeholder="Manopera"></td>
-            <td><label for="new-timing"></label><input type="number" id="new-timing" name="new-timing" placeholder="Timpi"></td>
-            <td><label for="new-price"></label><input type="number" id="new-price" name="new-price" placeholder="Pret/ora"></td>
-            <td><button style="border: none"><i class="fas fa-save"></i></button></td>
-        </tr>
-        </tbody>
-        <thead>
-        <tr>
-            <th scope="col">-</th>
-            <th scope="col">-</th>
-            <th scope="col">-</th>
-            <th scope="col">Total valoare neta manopera</th>
-            <th scope="col"></th>
-            <th scope="col">Total valoare bruta manopera</th>
-            <th scope="col">-</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>90</td>
-            <td></td>
-            <td>107.01</td>
-        </tr>
-        </tbody>
-
-        <thead>
-        <tr>
-            <th scope="col">Piese</th>
-            <th scope="col">Cantitate</th>
-            <th scope="col">Pret unitar</th>
-            <th scope="col">Valoare neta piese</th>
-            <th scope="col">TVA</th>
-            <th scope="col">Valoare bruta piese</th>
-            <th scope="col">Editare</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Discuri frana fata</td>
-            <td>2</td>
-            <td>30</td>
-            <td>60</td>
-            <td>19%</td>
-            <td>71.4</td>
-            <td><button style="border: none"><i class="fas fa-edit"></i></button></td>
-        </tr>
-        </tbody>
-        <thead>
-        <tr>
-            <th scope="col">-</th>
-            <th scope="col">-</th>
-            <th scope="col">-</th>
-            <th scope="col">Total valoare neta piese</th>
-            <th scope="col">-</th>
-            <th scope="col">Total valoare bruta piese</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>60</td>
-            <td></td>
-            <td>71.4</td>
-        </tr>
-        </tbody>
-        <thead>
-        <tr>
-            <th scope="col">-</th>
-            <th scope="col">-</th>
-            <th scope="col">-</th>
-            <th scope="col">Pret net unitar</th>
-            <th scope="col">-</th>
-            <th scope="col">Brut</th>
-        </tr>
-        </thead>
-    </table>
-</div>
 
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="js/user.js"></script>
+<script src="js/contract.js"></script>
 </html>
 
 

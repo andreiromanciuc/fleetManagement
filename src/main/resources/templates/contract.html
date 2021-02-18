@@ -9,45 +9,50 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 <body style="padding-top: 0">
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 0">
-    <a class="navbar-brand" href="/home">Inter Cars <br>Fleet Management</a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/user">IC - User <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/customer">Client</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/partner">Partener</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" style="margin-right: 200px">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-
-        <div class="personal-data" style="margin-right: 10px; opacity: 50%; size: 50px; padding: 5px">
-
-        </div>
-        <form method="get" action="/logout">
-            <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
-    </div>
-</nav>
-<div style="margin-left: 15px; margin-top: 10px" id="container">
-    <button type="button" class="btn btn-outline-warning" id="unfinished-contracts-btn">Contracte deschise</button>
-    <button type="button" class="btn btn-outline-success" id="new-contract-btn">Contract nou</button>
-    <button type="button" class="btn btn-outline-info" id="new-customer-btn">Creare Client/Partener</button>
-</div>
-
-<div id="display-requests">
-</div>
-
-
-
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Contract ID</th>
+        <th scope="col">Nr de inmatriculare</th>
+        <th scope="col">Nume client</th>
+        <th scope="col">Nume partener</th>
+        <th scope="col">Creat in data</th>
+        <th scope="col">Status piese</th>
+        <th scope="col">Facturat</th>
+        <th scope="col"><button style="border: none"><i class="fas fa-file-pdf"></i></button></th>
+    </tr>
+    <tr>
+        <th scope="col">Contract ID</th>
+        <th scope="col">Nr de inmatriculare</th>
+        <th scope="col">Nume client</th>
+        <th scope="col">Nume partener</th>
+        <th scope="col">Creat in data</th>
+        <th scope="col">Status piese</th>
+        <th scope="col">Facturat</th>
+        <th scope="col"><button style="border: none"><i class="fas fa-file-pdf"></i></button></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+    </tr>
+    <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

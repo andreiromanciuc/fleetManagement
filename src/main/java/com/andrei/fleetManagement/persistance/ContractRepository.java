@@ -9,5 +9,6 @@ public interface ContractRepository extends JpaRepository<Contract, Long> {
 
     List<Contract> findContractsByFinishedFalse();
 
+    List<Contract> findContractsByCreatedBy(String name);
 
 }

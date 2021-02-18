@@ -85,112 +85,85 @@
 </div>
 
 <div id="contract-table" style="visibility: hidden">
-
     <table class="table table-bordered table-dark">
         <thead>
+            <tr>
+                <th scope="col">Denumire Manopera</th>
+                <th scope="col">Timpi manopera</th>
+                <th scope="col">Pret unitar</th>
+                <th scope="col">Valoare neta</th>
+                <th scope="col">TVA %</th>
+                <th scope="col">Valoare TVA</th>
+                <th scope="col">Valoare bruta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    <label for="workmanship-name"></label>
+                    <input type="text" id="workmanship-name" name="workmanship-name" placeholder="Introduceti denumirea manoperei"
+                    style="width: 100%">
+                </th>
+                <th>
+                    <label for="workmanship-timing"></label>
+                    <input type="text" id="workmanship-timing" name="workmanship-timing" placeholder="Introduceti timpii pentru manopera"
+                           style="width: 100%">
+                </th>
+                <th>
+                    <label for="workmanship-price"></label>
+                    <input type="text" id="workmanship-price" name="workmanship-price" placeholder="Introduceti costul orei de manopera"
+                           style="width: 100%"></th>
+                <th id="total-cost"></th>
+                <th id="vat">19%</th>
+                <th id="total-cost-with-vat"></th>
+                <th></th>
+                <th>
+                    <button id="workmanship-save" style="border: none"> <i class="fas fa-save"></i></button>
+                    <button id="workmanship-edit" style="border: none"><i class="fas fa-edit"></i></button>
+                    <button id="workmanship-delete" style="border: none"><i class="fas fa-trash-alt"></i></button>
+                </th>
+            </tr>
+        </tbody>
+        <thead>
         <tr>
-            <th scope="col">Manopera</th>
-            <th scope="col">Timpi</th>
+            <th scope="col">Cod piesa</th>
+            <th scope="col">Denumire piesa</th>
             <th scope="col">Pret unitar</th>
-            <th scope="col">Valoare neta manopera</th>
-            <th scope="col">TVA</th>
-            <th scope="col">Valoare bruta manopera</th>
-            <th scope="col">Editare</th>
+            <th scope="col">Valoare neta</th>
+            <th scope="col">TVA %</th>
+            <th scope="col">Valoare TVA</th>
+            <th scope="col">Valoare bruta</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>D/R Discuri frana fata</td>
-            <td>1.2</td>
-            <td>75</td>
-            <td>90</td>
-            <td>19%</td>
-            <td>107.01</td>
-            <td><button style="border: none"><i class="fas fa-edit"></i></button></td>
-            <td><button style="border: none"><i class="fas fa-trash-alt"></i></button></td>
-        </tr>
-        <tr>
-            <td><label for="new-work"></label><input type="text" id="new-work" name="new-work" placeholder="Manopera"></td>
-            <td><label for="new-timing"></label><input type="number" id="new-timing" name="new-timing" placeholder="Timpi"></td>
-            <td><label for="new-price"></label><input type="number" id="new-price" name="new-price" placeholder="Pret/ora"></td>
-            <td><button style="border: none"><i class="fas fa-save"></i></button></td>
-        </tr>
-        </tbody>
-        <thead>
-        <tr>
-            <th scope="col">-</th>
-            <th scope="col">-</th>
-            <th scope="col">-</th>
-            <th scope="col">Total valoare neta manopera</th>
-            <th scope="col"></th>
-            <th scope="col">Total valoare bruta manopera</th>
-            <th scope="col">-</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>90</td>
-            <td></td>
-            <td>107.01</td>
+            <th>
+                <label for="piece-name"></label>
+                <input type="text" id="piece-name" name="workmanship-name" placeholder="Introduceti denumirea manoperei"
+                       style="width: 100%">
+            </th>
+            <th>
+                <label for="piece-code"></label>
+                <input type="text" id="piece-code" name="workmanship-timing" placeholder="Introduceti timpii pentru manopera"
+                       style="width: 100%">
+            </th>
+            <th>
+                <label for="piece-price"></label>
+                <input type="text" id="piece-price" name="workmanship-price" placeholder="Introduceti costul orei de manopera"
+                       style="width: 100%"></th>
+            <th id="total-piece-cost"></th>
+            <th id="piece-vat">19%</th>
+            <th id="total-pieces-cost-with-vat"></th>
+            <th></th>
+            <th>
+                <button id="piece-save" style="border: none"> <i class="fas fa-save"></i></button>
+                <button id="piece-edit" style="border: none"><i class="fas fa-edit"></i></button>
+                <button id="piece-delete" style="border: none"><i class="fas fa-trash-alt"></i></button>
+            </th>
         </tr>
         </tbody>
-
-        <thead>
-        <tr>
-            <th scope="col">Piese</th>
-            <th scope="col">Cantitate</th>
-            <th scope="col">Pret unitar</th>
-            <th scope="col">Valoare neta piese</th>
-            <th scope="col">TVA</th>
-            <th scope="col">Valoare bruta piese</th>
-            <th scope="col">Editare</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Discuri frana fata</td>
-            <td>2</td>
-            <td>30</td>
-            <td>60</td>
-            <td>19%</td>
-            <td>71.4</td>
-            <td><button style="border: none"><i class="fas fa-edit"></i></button></td>
-        </tr>
-        </tbody>
-        <thead>
-        <tr>
-            <th scope="col">-</th>
-            <th scope="col">-</th>
-            <th scope="col">-</th>
-            <th scope="col">Total valoare neta piese</th>
-            <th scope="col">-</th>
-            <th scope="col">Total valoare bruta piese</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>60</td>
-            <td></td>
-            <td>71.4</td>
-        </tr>
-        </tbody>
-        <thead>
-        <tr>
-            <th scope="col">-</th>
-            <th scope="col">-</th>
-            <th scope="col">-</th>
-            <th scope="col">Pret net unitar</th>
-            <th scope="col">-</th>
-            <th scope="col">Brut</th>
-        </tr>
-        </thead>
     </table>
+
 </div>
 
 

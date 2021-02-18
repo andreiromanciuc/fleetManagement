@@ -3,7 +3,6 @@ package com.andrei.fleetManagement.webController;
 import com.andrei.fleetManagement.domain.Contract;
 import com.andrei.fleetManagement.service.ContractService;
 import com.andrei.fleetManagement.service.WorkmanshipService;
-import com.andrei.fleetManagement.transfer.CreateContract;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +22,6 @@ public class IndexController {
 
     @GetMapping
     public List<Contract> getOpenedContracts() {
-        return contractService.getUnfinishedContracts();
+        return contractService.getUnfinishedContractsByUser();
     }
 }

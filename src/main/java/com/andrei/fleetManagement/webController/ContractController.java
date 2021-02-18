@@ -46,8 +46,8 @@ public class ContractController {
     }
 
     @GetMapping("/contracts")
-    public List<Contract> getUnfinishedContracts() {
-        return contractService.getUnfinishedContracts();
+    public List<Contract> getUnfinishedContractsByUser() {
+        return contractService.getUnfinishedContractsByUser();
     }
 
     @GetMapping("/{contractId}")

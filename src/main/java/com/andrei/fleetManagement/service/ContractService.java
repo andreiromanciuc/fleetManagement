@@ -10,7 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.*;
 
 
@@ -22,15 +21,17 @@ public class ContractService {
     private final CarService carService;
     private final CustomerService customerService;
     private final PartnerService partnerService;
+    private final UserService userService;
 
     public ContractService(ContractRepository contractRepository,
                            CarService carService,
                            CustomerService customerService,
-                           PartnerService partnerService) {
+                           PartnerService partnerService, UserService userService) {
         this.contractRepository = contractRepository;
         this.carService = carService;
         this.customerService = customerService;
         this.partnerService = partnerService;
+        this.userService = userService;
     }
 
     public Contract createContract(CreateContract createContract) {
@@ -117,9 +118,10 @@ public class ContractService {
         return contractRepository.save(contract);
     }
 
-    public List<Contract> getUnfinishedContracts() {
-        LOGGER.info("Retrieving all unfinished contracts");
-        return contractRepository.findContractsByFinishedFalse();
+    public List<Contract> getUnfinishedContractsByUser() {
+        LOGGER.info("Retrieving unfinished contracts by user");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return contractRepository.findContractsByCreatedBy(authentication.getName());
     }
 
     public List<Contract> getUnfinishedContractsForCustomer(long customerId) {

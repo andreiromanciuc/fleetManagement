@@ -2,6 +2,7 @@ window.User = {
 
     API_URL: "http://localhost:8081/home/user",
 
+    //From here User functions
     getCurrentUser: function () {
         $.ajax({
         url: User.API_URL,
@@ -19,55 +20,138 @@ window.User = {
 
 
 
-    getContractById: function (id) {
+    //From here Contract functions
+    getUnfinishedContractsByUser: function () {
         $.ajax({
-            url: User.API_URL+"/contract/" + id,
+            url: "http://localhost:8081/home/user/contract/contracts",
             method: "GET"
         }).done(function (response) {
-            // console.log(response);
-            $("#display-requests").html(User.displayDataOfContract(response));
-            let manopera = response.workmanshipList;
-            let sumManopera = 0;
-            for (let i = 0; i < manopera.length; i++) {
-
-            }
+            $("#display-requests").html(User.displayTable());
+            User.displayUnfinishedContracts(response);
         })
+    },
+
+    displayUnfinishedContracts: function (contracts) {
+        let tableBody = '';
+        contracts.forEach(contract => tableBody += User.getContractRow(contract));
+        $("#tbody").html(tableBody);
+    },
+
+    getContractRow: function (contract) {
+        return `
+        <tr>
+            <th scope="row">${contract.id}</th>
+            <td>${contract.createdBy}</td>
+            <td>${contract.startDate}</td>
+            <td>${contract.customer.name}</td>
+            <td>${contract.car.plateNumber}</td>
+            <td>${contract.car.vinNumber}</td>
+            <td>${contract.startFixCarDate}</td>
+            <td>${contract.orderedParts}</td>
+            <td>${contract.branch}</td>
+            <td>${contract.partner.name}</td>
+            <td>${contract.finished}</td>
+            <td><button id="edit-contract" onclick="
+                        $('#display-requests').html(User.getContractById(${contract.id}));
+                        document.getElementById('display-search-btn').style.visibility = 'hidden';
+                        document.getElementById('display-searched').style.visibility = 'hidden';
+                        document.getElementById('create-btn-div').style.visibility = 'hidden';
+                        document.getElementById('contract-table').style.visibility = 'visible';">
+                        <i class="fas fa-edit"></i></button></td>
+        </tr>`
+    },
+
+    displayTable: function () {
+        return `
+            <table class="table" style="margin-top: 10px">
+    <thead>
+         <tr>
+            <th>ID</th>
+            <th>Creat de:</th>
+            <th>Creat in data de:</th>
+            <th>Client</th>
+            <th>Nr. masina</th>
+            <th>VIN masina</th>
+            <th>Data programarii</th>
+            <th>Status comanda piese</th>
+            <th>Comandate in filiala</th>
+            <th>Partener</th>
+            <th>Status contract</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+
+    </tbody>
+</table>`
+    },
+
+    getContractById: function (id) {
+        $.ajax({
+            url: "http://localhost:8081/home/user/contract/" + id,
+            method: "GET"
+        }).done(function (response) {
+            $("#display-requests").html(User.displayDataOfContract(response));
+            // let manopera = response.workmanshipList;
+            // let sumManopera = 0;
+            // for (let i = 0; i < manopera.length; i++) {
+            //
+            // }
+        })
+    },
+
+    createWorkmanship: function (contractId) {
+        let id =  contractId;
+        console.log(id);
+        // let workName = $("#workmanship-name").val();
+        // console.log(workName);
+        // let tbody = {
+        //     name: "Inlocuit amortizoare fata",
+        //     timing: "3",
+        //     price: "75",
+        //     carModel: "Ford",
+        //     carType: "Transit"
+        // };
+        //
+        // $.ajax({
+        //     url: User.API_URL + "/contract/" + id,
+        //     method: "POST",
+        //     contentType: "application/json",
+        //     data: JSON.stringify(tbody)
+        // }).done(function (response) {
+        //     console.log(response);
+        // })
     },
 
     displayDataOfContract: function (contract) {
         return `<table class="table table-bordered table-dark">
-        <thead>
-        <tr>
-            <th scope="col">${contract.id}</th>
-            <th scope="col">${contract.car.plateNumber}</th>
-            <th scope="col">${contract.customer.name}</th>
-            <th scope="col">${contract.partner.name}</th>
-            <th scope="col">Creat in data: ${contract.startDate}</th>
-            <th scope="col">Status piese: ${contract.orderedParts}</th>
-            <th scope="col">Facturat: ${contract.finishDate}</th>
-            <th scope="col"><button style="border: none"><i class="fas fa-file-pdf"></i></button></th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                <label for="workmanship-name"></label>
-                <input type="text" id="workmanship-name" name="workmanship-name" placeholder="Introduceti denumirea manoperei">
-                </td>
-                <td>
-                <label for="workmanship-timing"></label>
-                <input type="text" id="workmanship-timing" name="workmanship-timing" placeholder="Introduceti timpii pentru manopera">
-                </td>
-                <td>
-                <label for="workmanship-price"></label>
-                <input type="text" id="workmanship-price" name="workmanship-price" placeholder="Introduceti costul orei de manopera"></td>
-                <td id="total-cost"></td>
-                <td id="vat">19%</td>
-                <td id="total-cost-with-vat"></td>
-                <td><button style="border: none"><i class="fas fa-edit"></i></button></td>
-                <td><button style="border: none"><i class="fas fa-trash-alt"></i></button></td>
-            </tr>
-    </table>`
+            <thead>
+                <tr>
+                    <th scope="col">Contract ID</th>
+                    <th scope="col">Nr de inmatriculare</th>
+                    <th scope="col">Nume client</th>
+                    <th scope="col">Nume partener</th>
+                    <th scope="col">Creat in data</th>
+                    <th scope="col">Status piese</th>
+                    <th scope="col">Facturat</th>
+                    <th scope="col">Edit</button></th>
+                    <th scope="col">Printare</button></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col">${contract.id}</th>
+                    <th scope="col">${contract.car.plateNumber}</th>
+                    <th scope="col">${contract.customer.name}</th>
+                    <th scope="col">${contract.partner.name}</th>
+                    <th scope="col">${contract.startDate}</th>
+                    <th scope="col">${contract.orderedParts}</th>
+                    <th scope="col">${contract.finishDate}</th>
+                    <th scope="col"><button style="border: none"><i class="fas fa-edit"></i></button>
+                    <button style="border: none"><i class="fas fa-trash-alt"></i></button></th>
+                    <th scope="col"><button style="border: none"><i class="fas fa-file-pdf"></i></button></th>
+                </tr>
+            </tbody>
+        </table>`
     },
 
     displayContractForm: function () {
@@ -172,6 +256,9 @@ window.User = {
         return`id: ${partner.id}, ${partner.name}`
     },
 
+
+
+    //From here create Customer or Partner functions
     displayCustomerForm: function () {
         return `
         <div class="row mb-3">
@@ -272,11 +359,16 @@ window.User = {
         }
     },
 
+
+    //From here bind events
     bindEvents: function () {
         $("#unfinished-contracts-btn").click(function (event) {
             event.preventDefault();
-
-            window.location = "/contract";
+            User.getUnfinishedContractsByUser();
+            document.getElementById("display-search-btn").style.visibility = 'hidden';
+            document.getElementById("display-searched").style.visibility = 'hidden';
+            document.getElementById("create-btn-div").style.visibility = 'hidden';
+            document.getElementById("contract-table").style.visibility = 'hidden';
         });
 
         $("#new-contract-btn").click(function (event) {
@@ -318,6 +410,11 @@ window.User = {
             event.preventDefault();
             User.createNewContract();
             User.createCustomer();
+        });
+
+        $("#workmanship-save").click(function (event) {
+            event.preventDefault();
+            User.createWorkmanship();
         });
 
     }
